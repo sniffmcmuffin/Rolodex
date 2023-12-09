@@ -1,55 +1,51 @@
 ﻿using ConsoleApp.Interfaces;
 using ConsoleApp.Models;
 using ConsoleApp.Models.Responses;
+using Newtonsoft.Json;
 using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace ConsoleApp.Services;
 
 public class ContactService : IContactService
 {
-    private static readonly List<IContact> _contactList = [];
+    private List<IContact> _contactList = [];
+    private FileService _fileService = new FileService(@"../../../contacts.json");
 
-    public bool AddToList(IContact contact)
-    {
-        // Gult test = refactoring
-        try
-        {
-            contact.Id = _contactList.Count + 1;
-            _contactList.Add(contact);
-            return true;
-        }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
-        return false;
-    }
-
-    public IServiceResult AddContact(IContact contact) // Merge AddContact with AddToList and keep testing and response.
+    // Gult test = refactoring
+    public IServiceResult AddContact(IContact contact)
     {
         IServiceResult response = new ServiceResult();
+        bool TestSuccess = false; // True or false for testing purposes
 
         try
-        {   // Lambda. X short/instead of contact
+        {
+            // Lambda. X short/instead of contact
             if (!_contactList.Any(x => x.email == contact.email))
             {
-                _contactList.Add(contact);
-                response.Status = Enums.ServiceStatus.SUCCESSED;
+                contact.Id = _contactList.Count + 1;
+                _contactList.Add(contact);               
+
+                _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
+                TestSuccess = true; 
             }
-            else 
+            else
             {
                 response.Status = Enums.ServiceStatus.ALREADY_EXISTS;
-            }                
+            }
         }
-
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
             response.Status = Enums.ServiceStatus.FAILED;
             response.Result = ex.Message;
+            TestSuccess = false; 
         }
+                
+        response.Status = TestSuccess ? Enums.ServiceStatus.SUCCESSED : Enums.ServiceStatus.FAILED;
 
         return response;
     }
+
 
     public IServiceResult DeleteContact(Func<Contact, bool> predicate)
     {
@@ -77,14 +73,21 @@ public class ContactService : IContactService
         return response;
     }
 
-    public IEnumerable<IContact> GetAllFromList()
+    public IEnumerable<IContact> GetAllFromList() // IEnumerable är läsbar lista.
     {
         try
         {
-            return _contactList;
+            var content = _fileService.GetContentFromFile();
+            {
+                if (!string.IsNullOrEmpty(content))
+                {
+                    _contactList = JsonConvert.DeserializeObject<List<IContact>>(content)!;
+                }
+            }
         }
         catch (Exception ex) { Debug.WriteLine(ex.Message); }
-        return null!; // Since its empty, not true/false.
+
+        return _contactList;
     }
 
     public IServiceResult GetContactFromList(Func<Contact, bool> predicate)

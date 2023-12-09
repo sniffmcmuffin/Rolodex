@@ -6,9 +6,9 @@ namespace ConsoleApp.Interfaces;
 
 public interface IContactService
 {
-    bool AddToList(IContact contact); // Testing purposes
+   // bool AddToList(IContact contact); // Testing purposes
     IEnumerable<IContact> GetAllFromList();
-    IServiceResult AddContact(IContact contact); // Merge with AddToList
+    IServiceResult AddContact(IContact contact); 
     IServiceResult GetContactFromList(Func<Contact, bool> predicate);
     IServiceResult GetContactByEmail(string email);
     IServiceResult GetAllContacts();

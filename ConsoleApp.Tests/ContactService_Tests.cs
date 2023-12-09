@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Interfaces;
+﻿using ConsoleApp.Enums;
+using ConsoleApp.Interfaces;
 using ConsoleApp.Models;
 using ConsoleApp.Services;
 using Xunit;
@@ -16,10 +17,10 @@ public class ContactService_Tests
         IContactService contactService = new ContactService();
 
         // Act
-        var result = contactService.AddToList(contact);
+        var result = contactService.AddContact(contact);
 
         // Assert
-        Assert.True(result);
+        Assert.Equal(ServiceStatus.SUCCESSED, result.Status);
     }
 
     [Fact] // Test each property in IContact.
@@ -28,7 +29,7 @@ public class ContactService_Tests
         // Arrange
         IContactService contactService = new ContactService();
         IContact contact = new Contact { firstName = "Jimmy", lastName = "Sjöström" };
-        contactService.AddToList(contact);
+        contactService.AddContact(contact);
 
         // Act
         IEnumerable<IContact> result = contactService.GetAllFromList();
