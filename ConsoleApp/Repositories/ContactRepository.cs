@@ -7,23 +7,28 @@ using System.Diagnostics;
 
 namespace ConsoleApp.Repositories;
 
-public class ContactRepository
+public class ContactRepository : IContactRepository
 {
     private List<IContact> _contactList;
-    private IFileService _fileService;
+    private IFileService? _fileService;
 
-    public ContactRepository(List<IContact> contactList)
+    public ContactRepository(IFileService fileService)
     {
-        _contactList = contactList;
+        _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
+        _contactList = LoadContactsFromStorage();
     }
 
     public IServiceResult AddContact(IContact contact)
     {
         IServiceResult response = new ServiceResult();
-        bool TestSuccess = false; // True or false for testing purposes
 
         try
         {
+            if (_fileService == null)
+            {
+                throw new InvalidOperationException("_fileService is null.");
+            }
+
             // Lambda. X short/instead of contact
             if (!_contactList.Any(x => x.email == contact.email))
             {
@@ -31,7 +36,7 @@ public class ContactRepository
                 _contactList.Add(contact);
 
                 _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
-                TestSuccess = true;
+                response.Status = Enums.ServiceStatus.SUCCESSED;
             }
             else
             {
@@ -43,25 +48,11 @@ public class ContactRepository
             Debug.WriteLine(ex.Message);
             response.Status = Enums.ServiceStatus.FAILED;
             response.Result = ex.Message;
-            TestSuccess = false;
         }
-
-        response.Status = TestSuccess ? Enums.ServiceStatus.SUCCESSED : Enums.ServiceStatus.FAILED;
 
         return response;
     }
 
-    public IServiceResult DeleteContact(Func<Contact, bool> predicate)
-    {
-        //  IContact contact = _contactList.FirstOrDefault(predicate);
-        throw new NotImplementedException();
-    }
-
-
-    // public IEnumerable<IContact> GetAllContacts()
-    // {
-    //    return _contactList;
-    // }
 
     public IServiceResult GetAllContacts()
     {
@@ -69,6 +60,11 @@ public class ContactRepository
 
         try
         {
+            if (_fileService == null)
+            {
+                throw new InvalidOperationException("_fileService is null.");
+            }
+
             var content = _fileService.GetContentFromFile();
             if (!string.IsNullOrEmpty(content))
             {
@@ -107,5 +103,32 @@ public class ContactRepository
     {
         throw new NotImplementedException();
     }
+
+    private List<IContact> LoadContactsFromStorage()
+    {
+        List<IContact> contactList = new List<IContact>();
+
+        try
+        {
+            string content = _fileService.GetContentFromFile();
+
+            if (!string.IsNullOrEmpty(content))
+            {
+                // Deserialize the JSON content into a list of Contacts
+                List<Contact> deserializedList = JsonConvert.DeserializeObject<List<Contact>>(content);
+
+                // Convert the list of Contacts to a list of IContact
+                contactList = deserializedList.Cast<IContact>().ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+        }
+
+        return contactList;
+    }
+
+
 }
 

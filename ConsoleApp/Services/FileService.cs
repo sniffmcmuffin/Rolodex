@@ -5,9 +5,14 @@ using System.Diagnostics;
 
 namespace ConsoleApp.Services;
 
-public class FileService(string filePath) : IFileService
+public class FileService : IFileService
 {
-    private readonly string _filePath = filePath;
+    private readonly string _filePath;
+
+    public FileService(string filePath)
+    {
+        _filePath = filePath;
+    }
 
     public string GetContentFromFile()
     {

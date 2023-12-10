@@ -25,9 +25,14 @@ public interface IMenuService
 }
 public class MenuService : IMenuService 
 {
-    // private readonly IContactService _contactService = new ContactService();
-    private readonly ContactRepository _contactRepository;
-      public void ShowMenu()
+    private readonly IContactService _contactService;
+
+    public MenuService(IContactService contactService)
+    {
+        _contactService = contactService;
+    }
+
+    public void ShowMenu()
     {
         while (true)
         {
@@ -74,22 +79,11 @@ public class MenuService : IMenuService
         contact.email = Console.ReadLine() ?? "";
         Console.Write("Phone number: ");
         contact.phoneNumber = Console.ReadLine() ?? "";
-               
-        var res = _contactRepository.AddContact(contact);
 
-        switch (res.Status)
-        {
-            case Enums.ServiceStatus.SUCCESSED:
-                Console.WriteLine("Added new contact successfully."); // Todo: Make it like added new contact, nameofcontact, successfully.
-                break;
-            case Enums.ServiceStatus.ALREADY_EXISTS:
-                Console.WriteLine("Contact already exists.");
-                break;
-            case Enums.ServiceStatus.FAILED:
-                Console.WriteLine("Failed to add new contact.");
-                Console.WriteLine("Guru Meditation: " + res.Result.ToString());
-                break;
-        }
+        // var res = _contactRepository.AddContact(contact); 
+        // _contactService.AddContact(res); 
+
+        _contactService!.AddContact(contact);
 
         DisplayPressAnyKey();
     }
@@ -97,11 +91,12 @@ public class MenuService : IMenuService
     private void ListMenu()
     {
         MenuHeader("Contact List");
-        var res = _contactRepository.GetAllContacts();
 
-        if (res.Status == Enums.ServiceStatus.SUCCESSED)
-        {           
-            if (res.Result is List<IContact> contactList)
+        var result = _contactService!.GetAllContacts();
+
+        if (result.Status == Enums.ServiceStatus.SUCCESSED)
+        {
+            if (result.Result is List<IContact> contactList)
             {
                 if (!contactList.Any())
                 {
@@ -114,11 +109,16 @@ public class MenuService : IMenuService
                         Console.WriteLine($"{contact.firstName} {contact.lastName} <{contact.email}>");
                     }
                 }
-                
             }
         }
+        else
+        {
+            Console.WriteLine($"Failed to retrieve contacts: {result.Result}");
+        }
+
         DisplayPressAnyKey();
     }
+
 
     private void AddContactMenu()
     {

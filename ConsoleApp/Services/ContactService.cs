@@ -9,46 +9,38 @@ namespace ConsoleApp.Services;
 
 public class ContactService : IContactService
 {
-    private List<IContact> _contactList = [];
     private FileService _fileService = new FileService(@"../../../contacts.json");
+    private readonly IContactRepository _contactRepository;
 
-    private readonly ContactRepository _contactRepository;
-
-    public ContactService(ContactRepository contactRepository)
+    public ContactService(IContactRepository contactRepository)
     {
         _contactRepository = contactRepository;
     }
-       
+
     public IServiceResult AddContact(IContact contact)
     {
-      return _contactRepository.AddContact(contact);
-    }
+        var result = _contactRepository.AddContact(contact);
 
-    public IServiceResult DeleteContact(Func<Contact, bool> predicate)
-    {      
-        throw new NotImplementedException();
+        switch (result.Status)
+        {
+            case Enums.ServiceStatus.SUCCESSED:
+                Console.WriteLine("Added new contact successfully.");
+                break;
+            case Enums.ServiceStatus.ALREADY_EXISTS:
+                Console.WriteLine("Contact already exists.");
+                break;
+            case Enums.ServiceStatus.FAILED:
+                Console.WriteLine("Failed to add new contact.");
+                Console.WriteLine("Guru Meditation: " + result.Result.ToString());
+                break;
+        }
+
+        return result; 
     }
 
     public IServiceResult GetAllContacts()
     {
         return _contactRepository.GetAllContacts();
-    }
-
-    public IEnumerable<IContact> GetAllFromList() // IEnumerable är läsbar lista.
-    {
-        try
-        {
-            var content = _fileService.GetContentFromFile();
-            {
-                if (!string.IsNullOrEmpty(content))
-                {
-                    _contactList = JsonConvert.DeserializeObject<List<IContact>>(content)!;
-                }
-            }
-        }
-        catch (Exception ex) { Debug.WriteLine(ex.Message); }
-
-        return _contactList;
     }
 
     public IServiceResult GetContactFromList(Func<Contact, bool> predicate)
