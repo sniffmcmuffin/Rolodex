@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.Interfaces;
 using ConsoleApp.Models;
+using ConsoleApp.Repositories;
 using ConsoleApp.Services;
 
 class Program
@@ -12,6 +13,10 @@ class Program
         IContact contact = new Contact();
         var IMenuService = new MenuService();
         IMenuService.ShowMenu();
-       // var contentFile = new FileService(@"contacts.txt");
-  }
+        // var contentFile = new FileService(@"contacts.txt");
+       
+       // var contactRepository = new ContactRepository(new List<IContact>());
+       // var contactService = new ContactService(contactRepository, new FileService(@"../../../contacts.json"));
+
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using ConsoleApp.Interfaces;
 using ConsoleApp.Models;
 using ConsoleApp.Models.Responses;
+using ConsoleApp.Repositories;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -11,66 +12,26 @@ public class ContactService : IContactService
     private List<IContact> _contactList = [];
     private FileService _fileService = new FileService(@"../../../contacts.json");
 
-    // Gult test = refactoring
+    private readonly ContactRepository _contactRepository;
+
+    public ContactService(ContactRepository contactRepository)
+    {
+        _contactRepository = contactRepository;
+    }
+       
     public IServiceResult AddContact(IContact contact)
     {
-        IServiceResult response = new ServiceResult();
-        bool TestSuccess = false; // True or false for testing purposes
-
-        try
-        {
-            // Lambda. X short/instead of contact
-            if (!_contactList.Any(x => x.email == contact.email))
-            {
-                contact.Id = _contactList.Count + 1;
-                _contactList.Add(contact);               
-
-                _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
-                TestSuccess = true; 
-            }
-            else
-            {
-                response.Status = Enums.ServiceStatus.ALREADY_EXISTS;
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-            response.Status = Enums.ServiceStatus.FAILED;
-            response.Result = ex.Message;
-            TestSuccess = false; 
-        }
-                
-        response.Status = TestSuccess ? Enums.ServiceStatus.SUCCESSED : Enums.ServiceStatus.FAILED;
-
-        return response;
+      return _contactRepository.AddContact(contact);
     }
 
-
     public IServiceResult DeleteContact(Func<Contact, bool> predicate)
-    {
-        //  IContact contact = _contactList.FirstOrDefault(predicate);
+    {      
         throw new NotImplementedException();
     }
 
     public IServiceResult GetAllContacts()
     {
-        IServiceResult response = new ServiceResult();
-
-        try
-        {
-            response.Status = Enums.ServiceStatus.SUCCESSED;
-            response.Result = _contactList;
-        }
-
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-            response.Status = Enums.ServiceStatus.FAILED;
-            response.Result = ex.Message;
-        }
-
-        return response;
+        return _contactRepository.GetAllContacts();
     }
 
     public IEnumerable<IContact> GetAllFromList() // IEnumerable är läsbar lista.
@@ -115,5 +76,3 @@ public class ContactService : IContactService
         throw new NotImplementedException();
     }
 }
-
-// Contact Management

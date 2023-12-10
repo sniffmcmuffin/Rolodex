@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.Interfaces;
 using ConsoleApp.Models;
+using ConsoleApp.Repositories;
 using System.Runtime.CompilerServices;
 
 namespace ConsoleApp.Services;
@@ -24,8 +25,9 @@ public interface IMenuService
 }
 public class MenuService : IMenuService 
 {
-    private readonly IContactService _contactService = new ContactService();
-    public void ShowMenu()
+    // private readonly IContactService _contactService = new ContactService();
+    private readonly ContactRepository _contactRepository;
+      public void ShowMenu()
     {
         while (true)
         {
@@ -72,8 +74,8 @@ public class MenuService : IMenuService
         contact.email = Console.ReadLine() ?? "";
         Console.Write("Phone number: ");
         contact.phoneNumber = Console.ReadLine() ?? "";
-
-        var res = _contactService.AddContact(contact);
+               
+        var res = _contactRepository.AddContact(contact);
 
         switch (res.Status)
         {
@@ -95,7 +97,7 @@ public class MenuService : IMenuService
     private void ListMenu()
     {
         MenuHeader("Contact List");
-        var res = _contactService.GetAllContacts();
+        var res = _contactRepository.GetAllContacts();
 
         if (res.Status == Enums.ServiceStatus.SUCCESSED)
         {           
