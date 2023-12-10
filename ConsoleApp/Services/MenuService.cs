@@ -80,9 +80,6 @@ public class MenuService : IMenuService
         Console.Write("Phone number: ");
         contact.phoneNumber = Console.ReadLine() ?? "";
 
-        // var res = _contactRepository.AddContact(contact); 
-        // _contactService.AddContact(res); 
-
         _contactService!.AddContact(contact);
 
         DisplayPressAnyKey();

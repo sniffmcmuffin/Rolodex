@@ -18,7 +18,7 @@ class Program
             services.AddSingleton<IContactService, ContactService>();
             services.AddSingleton<IFileService>(provider => new FileService(@"../../../contacts.json"));
             services.AddSingleton<IMenuService, MenuService>();
-            services.AddSingleton<MenuService>(); // Register MenuService
+            services.AddSingleton<MenuService>(); 
         }).Build();
 
 

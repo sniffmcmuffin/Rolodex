@@ -15,7 +15,7 @@ public class ContactRepository : IContactRepository
     public ContactRepository(IFileService fileService)
     {
         _fileService = fileService ?? throw new ArgumentNullException(nameof(fileService));
-        _contactList = LoadContactsFromStorage();
+        _contactList = _fileService.LoadContactsFromFile();
     }
 
     public IServiceResult AddContact(IContact contact)
@@ -65,11 +65,7 @@ public class ContactRepository : IContactRepository
                 throw new InvalidOperationException("_fileService is null.");
             }
 
-            var content = _fileService.GetContentFromFile();
-            if (!string.IsNullOrEmpty(content))
-            {
-                _contactList = JsonConvert.DeserializeObject<List<IContact>>(content)!;
-            }
+            _contactList = _fileService.LoadContactsFromFile();
 
             response.Status = Enums.ServiceStatus.SUCCESSED;
             response.Result = _contactList;
@@ -83,6 +79,7 @@ public class ContactRepository : IContactRepository
 
         return response;
     }
+
 
     public IServiceResult GetContactByEmail(string email)
     {
@@ -103,32 +100,5 @@ public class ContactRepository : IContactRepository
     {
         throw new NotImplementedException();
     }
-
-    private List<IContact> LoadContactsFromStorage()
-    {
-        List<IContact> contactList = new List<IContact>();
-
-        try
-        {
-            string content = _fileService.GetContentFromFile();
-
-            if (!string.IsNullOrEmpty(content))
-            {
-                // Deserialize the JSON content into a list of Contacts
-                List<Contact> deserializedList = JsonConvert.DeserializeObject<List<Contact>>(content);
-
-                // Convert the list of Contacts to a list of IContact
-                contactList = deserializedList.Cast<IContact>().ToList();
-            }
-        }
-        catch (Exception ex)
-        {
-            Debug.WriteLine(ex.Message);
-        }
-
-        return contactList;
-    }
-
-
 }
 
