@@ -61,16 +61,9 @@ namespace ConsoleApp.Services
 
                 if (!string.IsNullOrEmpty(content))
                 {
-                    List<Contact> deserializedList = JsonConvert.DeserializeObject<List<Contact>>(content);
+                    List<Contact> deserializedList = JsonConvert.DeserializeObject<List<Contact>>(content) ?? new List<Contact>();
 
-                    if (deserializedList == null)
-                    {
-                        Debug.WriteLine("Deserialization result is null.");
-                    }
-                    else
-                    {
-                        contactList = deserializedList.Cast<IContact>().ToList();
-                    }
+                    contactList = deserializedList.Cast<IContact>().ToList();
                 }
             }
             catch (Exception ex)
@@ -80,6 +73,8 @@ namespace ConsoleApp.Services
 
             return contactList;
         }
+
+
 
         public string GetContentFromFile()
         {
