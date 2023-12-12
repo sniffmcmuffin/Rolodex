@@ -5,25 +5,7 @@ using System.Runtime.CompilerServices;
 
 namespace ConsoleApp.Services;
 
-
-public interface IMenuService
-{
-    // Possible menu styling
-    // Meny:
-    // 1) Kontakter
-    //    - Lägg till
-    //    - Ändra
-    //    - Radera
-    // 2) Lista
-    //    - Lista en användare
-    //    - Lista alla användare
-    // 3) Inställningar
-    //    - Färgschema
-    //    - snabbt/långsamt (om jag har tid)
-    // 4) Avbryt
-    void ShowMenu();
-}
-public class MenuService : IMenuService 
+public class MenuService : IMenuService
 {
     private readonly IContactService _contactService;
 
@@ -36,12 +18,12 @@ public class MenuService : IMenuService
     {
         while (true)
         {   // I could have done something like 0-9 options, but I wanted submenus. 
-            MenuHeader("MENU OPTIONS");
-            Console.WriteLine($"{"1.", -3} Contacts");
-            Console.WriteLine($"{"2.", -3} Lists");
-            Console.WriteLine($"{"3.", -3} Settings");
-            Console.WriteLine($"{"4.", -3} Quit");
-            Console.WriteLine("Enter menu option: ");
+            MenuHeader("MAIN");
+            Console.WriteLine($"| {"1.", -3} Contacts");
+            Console.WriteLine($"| {"2.", -3} Lists");
+            Console.WriteLine($"| {"3.", -3} Settings");
+            Console.WriteLine($"| {"4.", -3} Quit");
+            Console.WriteLine("| Enter menu option: ");
             var option = Console.ReadLine();
 
             switch(option)
@@ -67,13 +49,13 @@ public class MenuService : IMenuService
 
     private void ContactMenu()
     {
-        MenuHeader("CONTACT MENU");
-        Console.WriteLine($"{"1.",-3} Add new contact");
-        Console.WriteLine($"{"2.",-3} Update a contact");
-        Console.WriteLine($"{"3.",-3} Delete a contact");
-        Console.WriteLine($"{"4.",-3} Delete all contacts");
-        Console.WriteLine($"{"5.",-3} Return to main menu");
-        Console.WriteLine("Enter menu option: ");
+        MenuHeader("CONTACT");
+        Console.WriteLine($"| {"1.",-3} Add new contact");
+        Console.WriteLine($"| {"2.",-3} Update a contact");
+        Console.WriteLine($"| {"3.",-3} Delete a contact");
+        Console.WriteLine($"| {"4.",-3} Delete all contacts");
+        Console.WriteLine($"| {"5.",-3} Return to main menu");
+        Console.WriteLine("| Enter menu option: ");
         var option = Console.ReadLine();
 
         switch (option)
@@ -92,7 +74,6 @@ public class MenuService : IMenuService
                 contact.phoneNumber = Console.ReadLine() ?? "";
 
                 _contactService!.AddContact(contact);
-
                 DisplayPressAnyKey(); ContactMenu();
                 break;
             case "2":
@@ -116,35 +97,55 @@ public class MenuService : IMenuService
 
     private void ListMenu()
     {
-        MenuHeader("Contact List");
+        MenuHeader("LIST");
+        Console.WriteLine($"| {"1.",-3} List a contact");
+        Console.WriteLine($"| {"2.",-3} List all contacts");
+        Console.WriteLine($"| {"3.",-3} Return to main menu");
+        Console.WriteLine("| Enter menu option: ");
+        var option = Console.ReadLine();
 
-        var result = _contactService!.GetAllContacts();
-
-        if (result.Status == Enums.ServiceStatus.SUCCESSED)
+        switch (option)
         {
-            if (result.Result is List<IContact> contactList)
-            {
-                if (!contactList.Any())
+            case "1": // List a contact by email
+                ShowContactByEmail();
+                break;
+            case "2": // List all contacts
+                var result = _contactService!.GetAllContacts();
+
+                if (result.Status == Enums.ServiceStatus.SUCCESSED)
                 {
-                    Console.WriteLine("No contacts found.");
+                    if (result.Result is List<IContact> contactList)
+                    {
+                        if (!contactList.Any())
+                        {
+                            Console.WriteLine("No contacts found.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("+-----------------------------------------------------------------------------------");
+                            Console.WriteLine($" | {PadRight("First Name", 15)} {PadRight("Last Name", 15)} {PadRight("Email", 30)}");
+
+                            foreach (var contact in contactList)
+                            {
+                                Console.WriteLine($" | {PadRight(contact.firstName, 15)} {PadRight(contact.lastName, 15)} {PadRight(contact.email, 30)}");
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    Console.WriteLine($"{PadRight("First Name", 15)} {PadRight("Last Name", 15)} {PadRight("Email", 30)}");
-
-                    foreach (var contact in contactList)
-                    {
-                        Console.WriteLine($"{PadRight(contact.firstName, 15)} {PadRight(contact.lastName, 15)} {PadRight(contact.email, 30)}");
-                    }
+                    Console.WriteLine($"Failed to retrieve contacts: {result.Result}");
                 }
-            }
-        }
-        else
-        {
-            Console.WriteLine($"Failed to retrieve contacts: {result.Result}");
-        }
 
-        DisplayPressAnyKey();
+                DisplayPressAnyKey();
+                break;
+            case "3": // Returning to main menu.
+                ShowMenu();
+                break;
+            default:
+                DisplayPressAnyKey();
+                break;
+        }
     }
 
     private string PadRight(string input, int length)
@@ -181,13 +182,15 @@ public class MenuService : IMenuService
     private void MenuHeader(string header) // Base menu.
     {
         Console.Clear();
-        Console.WriteLine($"Rolodex {header} Menu");
-        Console.WriteLine();
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        Console.WriteLine("=                             R O L O D E X                             =");
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        Console.WriteLine($"| [{header}]");
+        Console.WriteLine("|");
     }
 
-    private void QuitApp() // Make a nifty exit
-    {
-        // Console.Clear(); 
+    private void QuitApp() // Make a neat exit
+    {        
         Console.Write("Quit application? [y/n]");
         var option = Console.ReadLine() ?? "";
 
@@ -201,4 +204,47 @@ public class MenuService : IMenuService
         Console.WriteLine("Press any key to continue.");
         Console.ReadKey();
     }
+
+    public void ListContactByEmail(string email)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ShowContactByEmail()
+    {
+        Console.WriteLine("Enter email to search for a contact:");
+        string email = Console.ReadLine() ?? "default@email.com";
+
+        // Create a predicate to check for the email
+        Func<Contact, bool> predicate = contact => contact.email.Equals(email, StringComparison.OrdinalIgnoreCase);
+
+        var result = _contactService.GetContactFromList(predicate);
+
+        // Handle the result appropriately
+        if (result.Status == Enums.ServiceStatus.SUCCESSED)
+        {
+            var contacts = result.Result as List<IContact>;
+
+            if (contacts != null)
+            {
+                foreach (var contact in contacts)
+                {
+                    Console.WriteLine(contact);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Result is not of expected type.");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Failed to retrieve contact: {result.Result}");
+        }
+
+        DisplayPressAnyKey();
+    }
+
+
+
 }

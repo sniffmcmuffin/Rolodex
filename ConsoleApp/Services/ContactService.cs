@@ -45,7 +45,7 @@ public class ContactService : IContactService
 
     public IServiceResult GetContactFromList(Func<Contact, bool> predicate)
     {
-        throw new NotImplementedException();
+        return _contactRepository.GetContactByEmail(predicate);
     }
 
     public IServiceResult GetContactByEmail(string email)
