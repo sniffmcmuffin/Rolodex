@@ -16,7 +16,7 @@ class Program
             services.AddSingleton<List<IContact>>(new List<IContact>()); 
             services.AddSingleton<IContactRepository, ContactRepository>();
             services.AddSingleton<IContactService, ContactService>();
-            services.AddSingleton<IFileService>(provider => new FileService(@"../../../contacts.json"));
+            services.AddSingleton<IFileService>(provider => new FileService(@"../../../../SharedFiles/contacts.json"));
             services.AddSingleton<IMenuService, MenuService>();
             services.AddSingleton<MenuService>(); 
         }).Build();

@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Tests", "Console
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{232204F7-CA55-4015-9BEE-867FC55138E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedFiles", "SharedFiles\SharedFiles.csproj", "{A8EB139B-063A-45A3-8905-5AE319F1D252}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{7B8496C1-3F67-4925-AE20-0357706AB8AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedFiles", "SharedFiles", "{0D12AB37-2C9D-4B9E-B39D-35FAB2E8D4EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +27,6 @@ Global
 		{4864D5AB-A83E-4801-8573-5EE0A172581A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4864D5AB-A83E-4801-8573-5EE0A172581A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4864D5AB-A83E-4801-8573-5EE0A172581A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A8EB139B-063A-45A3-8905-5AE319F1D252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A8EB139B-063A-45A3-8905-5AE319F1D252}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A8EB139B-063A-45A3-8905-5AE319F1D252}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A8EB139B-063A-45A3-8905-5AE319F1D252}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B8496C1-3F67-4925-AE20-0357706AB8AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B8496C1-3F67-4925-AE20-0357706AB8AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B8496C1-3F67-4925-AE20-0357706AB8AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
