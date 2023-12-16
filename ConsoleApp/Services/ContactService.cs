@@ -14,8 +14,13 @@ public class ContactService : IContactService
 
     public ContactService(IContactRepository contactRepository, string filePath)
     {
-        _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
-        _fileService = new FileService(filePath);
+        // _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
+        // _fileService = new FileService(filePath);
+
+  
+            _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
+            _fileService = new FileService(filePath);
+       
     }
 
     public IServiceResult AddContact(IContact contact)

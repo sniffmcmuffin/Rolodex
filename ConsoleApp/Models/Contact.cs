@@ -6,6 +6,10 @@ namespace ConsoleApp.Models;
 public class Contact : IContact
 {
     public int Id { get; set; }
+   
+    // This broke things. Will work it in later when I have time. Reverting to using Id in Interface for nw.
+    //public Guid id { get; set; } = Guid.NewGuid(); // Not in Interface, but here according to Hans. 
+    
     public string firstName { get; set; } = null!;
     public string lastName { get; set; } = null!;
     public string email { get; set; } = null!;

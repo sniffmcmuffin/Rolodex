@@ -15,23 +15,28 @@ class Program
         {
             services.AddSingleton<List<IContact>>(new List<IContact>()); 
             services.AddSingleton<IContactRepository, ContactRepository>();
-            services.AddSingleton<IContactService, ContactService>();
+            //   services.AddSingleton<IContactService, ContactService>();
+            services.AddSingleton<IContactService>(provider => new ContactService(provider.GetRequiredService<IContactRepository>(),
+            @"../../../../SharedFiles/contacts.json"));
+
+       //    services.AddSingleton<IFileService>(provider => new FileService(@"../../../contacts.json"));
             services.AddSingleton<IFileService>(provider => new FileService(@"../../../../SharedFiles/contacts.json"));
-            services.AddSingleton<IMenuService, MenuService>();
-            services.AddSingleton<MenuService>(); 
+            services.AddScoped<IMenuService, MenuService>();
+            services.AddSingleton<MenuService>();
+
         }).Build();
 
 
         builder.Start();
 
         IContact contact = new Contact();
-    
+
         var IMenuService = builder.Services.GetRequiredService<IMenuService>();
-      //  var contactService = builder.Services.GetRequiredService<ContactService>();
-     //   var contactRepository = builder.Services.GetService<IContactRepository>();
+        //  var contactService = builder.Services.GetRequiredService<ContactService>();
+        //   var contactRepository = builder.Services.GetService<IContactRepository>();
 
         IMenuService.ShowMenu();
-      
+
         // var contentFile = new FileService(@"contacts.txt");
 
         // var contactRepository = new ContactRepository(new List<IContact>());
