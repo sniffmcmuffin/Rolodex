@@ -9,12 +9,13 @@ namespace ConsoleApp.Services;
 
 public class ContactService : IContactService
 {
-    private FileService _fileService = new FileService(@"../../../contacts.json");
+    private readonly FileService _fileService;
     private readonly IContactRepository _contactRepository;
 
-    public ContactService(IContactRepository contactRepository)
+    public ContactService(IContactRepository contactRepository, string filePath)
     {
-        _contactRepository = contactRepository;
+        _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
+        _fileService = new FileService(filePath);
     }
 
     public IServiceResult AddContact(IContact contact)

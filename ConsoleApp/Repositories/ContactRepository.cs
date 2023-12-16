@@ -5,6 +5,7 @@ using ConsoleApp.Services;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks.Sources;
 
 namespace ConsoleApp.Repositories;
 
@@ -55,7 +56,6 @@ public class ContactRepository : IContactRepository
         return response;
     }
 
-
     public IServiceResult GetAllContacts()
     {
         IServiceResult response = new ServiceResult();
@@ -81,7 +81,6 @@ public class ContactRepository : IContactRepository
 
         return response;
     }
-
 
     public IServiceResult GetContactByEmail(Func<Contact, bool> predicate)
     {
