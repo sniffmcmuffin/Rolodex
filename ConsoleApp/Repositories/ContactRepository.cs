@@ -118,12 +118,6 @@ public class ContactRepository : IContactRepository
         return response;
     }
 
-
-    public IServiceResult UpdateContact(IContact contact)
-    {
-        throw new NotImplementedException();
-    }
-
     public IServiceResult DeleteContact(Func<IContact, bool> predicate)
     {
         IServiceResult response = new ServiceResult();
@@ -137,7 +131,7 @@ public class ContactRepository : IContactRepository
 
             _contactList = _fileService.LoadContactsFromFile();
 
-            // Find the contacts with the specified predicate
+            // Find the contacts with the specified predicate.
             var contactsToDelete = _contactList.OfType<Contact>().Where(predicate).ToList();
 
             if (contactsToDelete.Any())
@@ -148,7 +142,7 @@ public class ContactRepository : IContactRepository
                     _contactList.Remove(contactToDelete);
                 }
 
-                // Save the updated list to the file
+                // Save the updated list to file.
                 _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
 
                 response.Status = Enums.ServiceStatus.SUCCESSED;

@@ -40,7 +40,7 @@ public class ContactService_Tests
         //  var contactService = new ContactService(mockRepository.Object);
         var contactService = new ContactService(mockRepository.Object, @"../../../contacts.json");
 
-        IContact contact = new Contact { firstName = "Jimmy", lastName = "Sjöström" };
+        IContact contact = new Contact { firstName = "Jimmy", lastName = "Sjöström", email = "jimmy.sjostrom@domain.se", phoneNumber ="075-343564454" };
                
         mockRepository.Setup(r => r.GetAllContacts()).Returns(new ServiceResult { Status = ServiceStatus.SUCCESSED, Result = new List<IContact> { contact } });
 
