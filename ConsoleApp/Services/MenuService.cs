@@ -1,6 +1,7 @@
 ﻿using ConsoleApp.Interfaces;
 using ConsoleApp.Models;
 using ConsoleApp.Repositories;
+using System.Diagnostics.Eventing.Reader;
 using System.Runtime.CompilerServices;
 
 namespace ConsoleApp.Services;
@@ -8,6 +9,7 @@ namespace ConsoleApp.Services;
 public class MenuService : IMenuService
 {
     private readonly IContactService _contactService;
+    string UpdateOrDelete = null!;
 
     public MenuService(IContactService contactService)
     {
@@ -50,42 +52,34 @@ public class MenuService : IMenuService
     private void ContactMenu()
     {
         MenuHeader("CONTACT");
-        Console.WriteLine($"| {"1.",-3} Add new contact");
-        Console.WriteLine($"| {"2.",-3} Update a contact");
-        Console.WriteLine($"| {"3.",-3} Delete a contact");
-        Console.WriteLine($"| {"4.",-3} Delete all contacts");
-        Console.WriteLine($"| {"5.",-3} Return to main menu");
+        Console.WriteLine($"| {"1.",-3} Add new contact");      // Done
+        Console.WriteLine($"| {"2.",-3} Update a contact");     // Done
+        Console.WriteLine($"| {"3.",-3} Delete a contact");     // Done
+        Console.WriteLine($"| {"4.",-3} Return to main menu");  // Done
         Console.WriteLine("| Enter menu option: ");
         var option = Console.ReadLine();
 
         switch (option)
         {
             case "1": // Add new contact.
-                IContact contact = new Contact();
-             
                 MenuHeader("Add new contact");
-                Console.Write("First name: ");
-                contact.firstName = Console.ReadLine() ?? "";
-                Console.Write("Last name: ");
-                contact.lastName = Console.ReadLine() ?? "";
-                Console.Write("Email: ");
-                contact.email = Console.ReadLine() ?? "";
-                Console.Write("Phone number: ");
-                contact.phoneNumber = Console.ReadLine() ?? "";
-
-                _contactService!.AddContact(contact);
-                DisplayPressAnyKey(); ContactMenu();
+                TestAdd();
                 break;
             case "2":
-                ListMenu();
+                // This is probably lazy, but the idea for now:
+                // Find contact by email and remove it. Then add new contact.
+                MenuHeader("Update a contact");
+                Console.WriteLine("Enter email belonging to contact you wish update:");
+                UpdateOrDelete = "updated";
+                DeleteContact();
+                TestAdd();
+                DisplayPressAnyKey(); ContactMenu();
                 break;
             case "3":
                 DeleteContact();
+                UpdateOrDelete = "deleted";
                 break;
-            case "4":
-                SettingsMenu();
-                break;
-            case "5": // Returning to main menu.
+            case "4": // Returning to main menu.
                 ShowMenu();
                 break;
             default:
@@ -95,18 +89,35 @@ public class MenuService : IMenuService
         
     }
 
+    private void TestAdd()
+    {
+        IContact contact = new Contact();
+        Console.Write("First name: ");
+        contact.firstName = Console.ReadLine() ?? "";
+        Console.Write("Last name: ");
+        contact.lastName = Console.ReadLine() ?? "";
+        Console.Write("Email: ");
+        contact.email = Console.ReadLine() ?? "";
+        Console.Write("Phone number: ");
+        contact.phoneNumber = Console.ReadLine() ?? "";
+
+        _contactService!.AddContact(contact);
+        DisplayPressAnyKey(); ContactMenu();
+    }
+
     private void ListMenu()
     {
         MenuHeader("LIST");
-        Console.WriteLine($"| {"1.",-3} List a contact");
-        Console.WriteLine($"| {"2.",-3} List all contacts");
-        Console.WriteLine($"| {"3.",-3} Return to main menu");
+        Console.WriteLine($"| {"1.",-3} List a contact");         // Done
+        Console.WriteLine($"| {"2.",-3} List all contacts");      // Done
+        Console.WriteLine($"| {"3.",-3} Return to main menu");    // Done
         Console.WriteLine("| Enter menu option: ");
         var option = Console.ReadLine();
 
         switch (option)
         {
             case "1": // List a contact by email.
+                Console.WriteLine("Enter email to search for a contact:");
                 ShowContactByEmail();
                 break;
             case "2": // List all contacts. Lets move this out of the switch later on.
@@ -188,7 +199,7 @@ public class MenuService : IMenuService
         Console.WriteLine($"| [{header}]");
         Console.WriteLine("|");
     }
-
+    
     private void QuitApp() // Make a neat exit
     {        
         Console.Write("Quit application? [y/n]");
@@ -212,7 +223,7 @@ public class MenuService : IMenuService
 
     public void ShowContactByEmail()
     {
-        Console.WriteLine("Enter email to search for a contact:");
+        
         string email = Console.ReadLine() ?? "default@email.com";
 
         Func<Contact, bool> predicate = contact => contact.email.Equals(email, StringComparison.OrdinalIgnoreCase);
@@ -244,8 +255,7 @@ public class MenuService : IMenuService
     }
 
     public void DeleteContact()
-    {
-        Console.WriteLine("Enter email belonging to contact you wish to delete:");
+    {       
         string email = Console.ReadLine() ?? "default@email.com";
 
         Func<Contact, bool> predicate = contact => contact.email.Equals(email, StringComparison.OrdinalIgnoreCase);
@@ -264,7 +274,7 @@ public class MenuService : IMenuService
 
                 if (deleteResult.Status == Enums.ServiceStatus.SUCCESSED)
                 {
-                    Console.WriteLine("Contact deleted successfully.");
+                    Console.WriteLine($"Contact being {UpdateOrDelete} updated..."); // Not perfect.
                 }
                 else
                 {
@@ -279,8 +289,6 @@ public class MenuService : IMenuService
         else
         {
             Console.WriteLine($"Failed to retrieve contact: {result.Result}");
-        }
-
-        DisplayPressAnyKey(); ContactMenu();
-    }
+        }       
+    }     
 }

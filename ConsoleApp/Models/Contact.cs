@@ -7,7 +7,7 @@ public class Contact : IContact
 {
     public int Id { get; set; }
    
-    // This broke things. Will work it in later when I have time. Reverting to using Id in Interface for nw.
+    // This broke things. Will work it in later when I have time. Reverting to using Id in Interface for now.
     //public Guid id { get; set; } = Guid.NewGuid(); // Not in Interface, but here according to Hans. 
     
     public string firstName { get; set; } = null!;
