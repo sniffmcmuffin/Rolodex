@@ -95,7 +95,7 @@ public class ContactRepository : IContactRepository
 
             _contactList = _fileService.LoadContactsFromFile();
 
-            // Find the contact with the specified predicate
+            // Find the contact with the specified predicate.
             var contact = _contactList.OfType<Contact>().FirstOrDefault(predicate);
 
             if (contact != null)
@@ -126,12 +126,47 @@ public class ContactRepository : IContactRepository
 
     public IServiceResult DeleteContact(Func<IContact, bool> predicate)
     {
-        throw new NotImplementedException();
-    }
+        IServiceResult response = new ServiceResult();
 
-    public IServiceResult DeleteContactByEmail(string email)
-    {
-        throw new NotImplementedException();
+        try
+        {
+            if (_fileService == null)
+            {
+                throw new InvalidOperationException("_fileService is null.");
+            }
+
+            _contactList = _fileService.LoadContactsFromFile();
+
+            // Find the contacts with the specified predicate
+            var contactsToDelete = _contactList.OfType<Contact>().Where(predicate).ToList();
+
+            if (contactsToDelete.Any())
+            {
+                // Remove the found contact.
+                foreach (var contactToDelete in contactsToDelete)
+                {
+                    _contactList.Remove(contactToDelete);
+                }
+
+                // Save the updated list to the file
+                _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
+
+                response.Status = Enums.ServiceStatus.SUCCESSED;
+                response.Result = contactsToDelete.Cast<IContact>().ToList();
+            }
+            else
+            {
+                response.Status = Enums.ServiceStatus.NOT_FOUND;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            response.Status = Enums.ServiceStatus.FAILED;
+            response.Result = ex.Message;
+        }
+
+        return response;
     }
 }
 

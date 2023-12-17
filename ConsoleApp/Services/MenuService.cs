@@ -80,7 +80,7 @@ public class MenuService : IMenuService
                 ListMenu();
                 break;
             case "3":
-                SettingsMenu();
+                DeleteContact();
                 break;
             case "4":
                 SettingsMenu();
@@ -106,10 +106,10 @@ public class MenuService : IMenuService
 
         switch (option)
         {
-            case "1": // List a contact by email
+            case "1": // List a contact by email.
                 ShowContactByEmail();
                 break;
-            case "2": // List all contacts
+            case "2": // List all contacts. Lets move this out of the switch later on.
                 var result = _contactService!.GetAllContacts();
 
                 if (result.Status == Enums.ServiceStatus.SUCCESSED)
@@ -121,8 +121,8 @@ public class MenuService : IMenuService
                             Console.WriteLine("No contacts found.");
                         }
                         else
-                        {
-                            Console.WriteLine("+-----------------------------------------------------------------------------------");
+                        {                      
+                            Console.WriteLine("+------------------------------------------------------------------------");
                             Console.WriteLine($" | {PadRight("First Name", 15)} {PadRight("Last Name", 15)} {PadRight("Email", 30)}");
 
                             foreach (var contact in contactList)
@@ -137,7 +137,7 @@ public class MenuService : IMenuService
                     Console.WriteLine($"Failed to retrieve contacts: {result.Result}");
                 }
 
-                DisplayPressAnyKey();
+                DisplayPressAnyKey(); ListMenu();
                 break;
             case "3": // Returning to main menu.
                 ShowMenu();
@@ -215,12 +215,10 @@ public class MenuService : IMenuService
         Console.WriteLine("Enter email to search for a contact:");
         string email = Console.ReadLine() ?? "default@email.com";
 
-        // Create a predicate to check for the email
         Func<Contact, bool> predicate = contact => contact.email.Equals(email, StringComparison.OrdinalIgnoreCase);
 
         var result = _contactService.GetContactFromList(predicate);
 
-        // Handle the result appropriately
         if (result.Status == Enums.ServiceStatus.SUCCESSED)
         {
             var contacts = result.Result as List<IContact>;
@@ -242,9 +240,47 @@ public class MenuService : IMenuService
             Console.WriteLine($"Failed to retrieve contact: {result.Result}");
         }
 
-        DisplayPressAnyKey();
+        DisplayPressAnyKey(); ListMenu();
     }
 
+    public void DeleteContact()
+    {
+        Console.WriteLine("Enter email belonging to contact you wish to delete:");
+        string email = Console.ReadLine() ?? "default@email.com";
 
+        Func<Contact, bool> predicate = contact => contact.email.Equals(email, StringComparison.OrdinalIgnoreCase);
 
+        var result = _contactService.GetContactFromList(predicate);
+
+        if (result.Status == Enums.ServiceStatus.SUCCESSED)
+        {
+            var contacts = result.Result as List<IContact>;
+
+            if (contacts != null && contacts.Any())
+            {
+                // Assuming we want to delete the first contact found with the specified email.
+                var contactToDelete = contacts.First();
+                var deleteResult = _contactService.DeleteContact(c => c.Id == contactToDelete.Id);
+
+                if (deleteResult.Status == Enums.ServiceStatus.SUCCESSED)
+                {
+                    Console.WriteLine("Contact deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine($"Failed to delete contact: {deleteResult.Result}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No contacts found with the specified email.");
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Failed to retrieve contact: {result.Result}");
+        }
+
+        DisplayPressAnyKey(); ContactMenu();
+    }
 }

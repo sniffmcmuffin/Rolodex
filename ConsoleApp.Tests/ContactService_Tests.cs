@@ -60,9 +60,25 @@ public class ContactService_Tests
         Assert.NotNull(returnedContact);
         Assert.Equal("Jimmy", returnedContact.firstName);
         Assert.Equal("Sjöström", returnedContact.lastName);
-       
     }
 
+    [Fact]
+    public void DeleteContactByEmailShouldRemoveContactFromTheList_ThenReturnTrue()
+    {
+        // Arrange
+        var mockRepository = new Mock<IContactRepository>();
+        var contactService = new ContactService(mockRepository.Object, @"../../../contacts.json");
+
+        // Setup mock for deleting contact by email
+        mockRepository.Setup(r => r.DeleteContact(It.IsAny<Func<IContact, bool>>()))
+                      .Returns(new ServiceResult { Status = ServiceStatus.SUCCESSED });
+
+        // Act
+        var deleteResult = contactService.DeleteContact(c => c.email == "jimmy@example.com");
+
+        // Assert
+        Assert.Equal(ServiceStatus.SUCCESSED, deleteResult.Status);
+    }
 
 
 

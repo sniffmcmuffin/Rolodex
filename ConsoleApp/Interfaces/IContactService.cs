@@ -11,7 +11,7 @@ public interface IContactService
     IServiceResult AddContact(IContact contact); 
     IServiceResult UpdateContact(IContact contact);
     IServiceResult DeleteContact(Func<IContact, bool> predicate);
-    IServiceResult DeleteContactByEmail(string email);
+   // IServiceResult DeleteContactByEmail(string email);
     IServiceResult GetContactFromList(Func<Contact, bool> predicate);
     IServiceResult GetAllContacts();
 }

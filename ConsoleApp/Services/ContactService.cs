@@ -16,8 +16,7 @@ public class ContactService : IContactService
     {
         // _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
         // _fileService = new FileService(filePath);
-
-  
+          
             _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
             _fileService = new FileService(filePath);
        
@@ -66,7 +65,7 @@ public class ContactService : IContactService
 
     public IServiceResult DeleteContact(Func<IContact, bool> predicate)
     {
-        throw new NotImplementedException();
+        return _contactRepository.DeleteContact(predicate);
     }
 
     public IServiceResult DeleteContactByEmail(string email)
