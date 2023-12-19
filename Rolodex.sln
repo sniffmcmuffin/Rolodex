@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "WpfApp\WpfApp.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedFiles", "SharedFiles", "{0D12AB37-2C9D-4B9E-B39D-35FAB2E8D4EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedProj", "SharedProj\SharedProj.csproj", "{1ABEA35A-BD46-44DE-90CD-78859364A106}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{CA79F172-9358-460A-9FBD-394855BCE94F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,10 @@ Global
 		{7B8496C1-3F67-4925-AE20-0357706AB8AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B8496C1-3F67-4925-AE20-0357706AB8AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B8496C1-3F67-4925-AE20-0357706AB8AC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1ABEA35A-BD46-44DE-90CD-78859364A106}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1ABEA35A-BD46-44DE-90CD-78859364A106}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1ABEA35A-BD46-44DE-90CD-78859364A106}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1ABEA35A-BD46-44DE-90CD-78859364A106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA79F172-9358-460A-9FBD-394855BCE94F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA79F172-9358-460A-9FBD-394855BCE94F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA79F172-9358-460A-9FBD-394855BCE94F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA79F172-9358-460A-9FBD-394855BCE94F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
