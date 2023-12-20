@@ -4,11 +4,49 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp.Mvvm.Views"
+        
+        xmlns:models="clr-namespace:Shared.Models;assembly=Shared"
+        xmlns:viewmodels="clr-namespace:WpfApp.Mvvm.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+        
         mc:Ignorable="d"
-        Background="#000000"
+        Background="#ffffff"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
+   
     <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+             <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,30">
+            <Label Content="Company Name" />
+            <TextBox Text="{Binding ContactForm.CompanyName}" Padding="2,5"/>
+            <Label Content="Contact Person" />
+            <TextBox Text="{Binding ContactForm.ContactPerson}" Padding="2,5"/>
+            <Button Content="Add Contact" Command="{Binding AddContactToListCommand}" Padding="0, 5" Margin="0,10,0,0"/>
+        </StackPanel>       
+
+        <ListView Grid.Row="1" ItemsSource="{Binding ContactList}" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid  Margin="2, 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding CompanyName}" />
+                            <TextBlock Text="{Binding ContactPerson}" FontSize="10" Foreground="DarkGray"/>
+                        </StackPanel>
+
+                        <Button CommandParameter="{Binding .}" Command="{Binding DataContext.RemoveContactFromListCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="1" Content="X" Width="25" Height="25" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </Window>

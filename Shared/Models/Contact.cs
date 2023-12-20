@@ -12,4 +12,7 @@ public class Contact : IContact
     public string city { get; set; } = null!;
     public string email { get; set; } = null!;
     public string phoneNumber { get; set; } = null!;
+    public string CompanyName { get; set; } = null!;
+    public string ContactPerson { get; set; } = null!;
+
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using WpfApp.Mvvm.ViewModels;
 
 namespace WpfApp.Mvvm.Views;
 
@@ -7,8 +8,9 @@ namespace WpfApp.Mvvm.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    public MainWindow(MainViewModel viewModel) // Dependency Injection.
     {
         InitializeComponent(); // Alltid längst upp i konstruktorn.
+        DataContext = viewModel;
     }
 }

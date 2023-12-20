@@ -10,5 +10,7 @@
         string phoneNumber { get; set; }
         string street { get; set; }
         int zipCode { get; set; }
+        string CompanyName { get; set; }
+        string ContactPerson { get; set; }
     }
 }
