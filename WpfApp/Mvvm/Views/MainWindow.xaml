@@ -7,17 +7,19 @@
         
         xmlns:models="clr-namespace:Shared.Models;assembly=Shared"
         xmlns:viewmodels="clr-namespace:WpfApp.Mvvm.ViewModels"
+        xmlns:views="clr-namespace:WpfApp.Mvvm.Views"
         d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         
         mc:Ignorable="d"
         Background="#ffffff"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
-   
+
     <Grid Margin="20">
-        <Grid.RowDefinitions>
+ 
+        <!--<Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,30">
@@ -26,7 +28,7 @@
             <Label Content="Contact Person" />
             <TextBox Text="{Binding ContactForm.ContactPerson}" Padding="2,5"/>
             <Button Content="Add Contact" Command="{Binding AddContactToListCommand}" Padding="0, 5" Margin="0,10,0,0"/>
-        </StackPanel>       
+        </StackPanel>
 
         <ListView Grid.Row="1" ItemsSource="{Binding ContactList}" HorizontalContentAlignment="Stretch">
             <ListView.ItemTemplate>
@@ -46,7 +48,18 @@
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </ListView>-->
 
+        <ContentControl Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:ContactListViewModel}">
+                    <views:ContactListView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type viewmodels:ContactAddViewModel}">
+                    <views:ContactAddView />
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+        
     </Grid>
 </Window>

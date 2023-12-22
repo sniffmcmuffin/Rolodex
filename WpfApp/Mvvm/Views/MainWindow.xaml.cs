@@ -11,6 +11,6 @@ public partial class MainWindow : Window
     public MainWindow(MainViewModel viewModel) // Dependency Injection.
     {
         InitializeComponent(); // Alltid längst upp i konstruktorn.
-        DataContext = viewModel;
+        DataContext = viewModel;       
     }
 }

@@ -17,8 +17,13 @@ public partial class App : Application
     {
         builder = Host.CreateDefaultBuilder().ConfigureServices(services =>
         {
+          //  services.AddSingleton<ContactService>();
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<MainWindow>();
+            services.AddTransient<ContactListViewModel>();
+            services.AddTransient<ContactListView>();
+            services.AddTransient<ContactAddViewModel>();
+            services.AddTransient<ContactAddView>();
         })
         .Build();
     }
@@ -30,6 +35,7 @@ public partial class App : Application
         var mainWindow = builder!.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
 
+       
        // base.OnStartup(e); Standardfunktioner om man behöver dom.
     }
 }
