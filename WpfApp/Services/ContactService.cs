@@ -1,25 +1,44 @@
-﻿using Shared.Models;
+﻿using Shared.Interfaces;
+using Shared.Models;
 using System.Net.Http.Headers;
 using System.Security.Policy;
+using Shared.Models.Responses;
+using Shared.Repositories;
+using Newtonsoft.Json;
+using Shared.Services;
 
 namespace WpfApp.Services;
 
 public class ContactService
 {
     private List<Contact> _contacts = [];
-    
-    public bool Add(Contact contact)
-    {
-        if (contact == null)
-            return false;
+    //  private List<Contact> _contacts = new List<Contact>();
+    private readonly FileService _fileService;
+    private readonly IContactRepository _contactRepository;
 
-        _contacts.Add(contact);
-         return true;
+    public ContactService(IContactRepository contactRepository, string filePath)
+    {
+        // _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
+        // _fileService = new FileService(filePath);
+
+        _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
+        _fileService = new FileService(filePath);    }
+
+    public void Add(Contact contact)
+    {
+        var result = _contactRepository.AddContact(contact);
+        //  _contactService!.AddContact(contact);
+        //  _contacts.Add(contact);
     }
 
     public IEnumerable<Contact> GetAll()
     {
-        return _contacts;
+       return _contacts;     
+    }
+    
+    public IServiceResult GetAllContacts()
+    {        
+        return _contactRepository.GetAllContacts();
     }
 
     public Contact GetOne(Func<Contact, bool> predicate)
@@ -44,13 +63,13 @@ public class ContactService
         return null!;
     }
 
-    public bool Remove(Contact contact)
+    public void Remove(Contact contact)
     {
-        if (!_contacts.Contains(contact))
-            return false;
-
-        _contacts.Remove(contact);
-        return true;
+      var con = _contacts.FirstOrDefault(x => x.Id == contact.Id);
+      if (con != null)
+        {
+            _contacts.Remove(con);
+        }
     }
 
     public bool Exists(Func<Contact, bool> predicate)

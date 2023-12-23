@@ -15,8 +15,19 @@
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
 
-    <Grid Margin="20">
- 
+    <ContentControl Content="{Binding CurrentViewModel}">
+        <ContentControl.Resources>
+            <DataTemplate DataType="{x:Type viewmodels:ContactListViewModel }">
+                <views:ContactListView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ContactAddViewModel }">
+                <views:ContactAddView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:ContactEditViewModel }">
+                <views:ContactEditView />
+            </DataTemplate>
+        </ContentControl.Resources>
+    </ContentControl>
         <!--<Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
@@ -43,14 +54,14 @@
                             <TextBlock Text="{Binding CompanyName}" />
                             <TextBlock Text="{Binding ContactPerson}" FontSize="10" Foreground="DarkGray"/>
                         </StackPanel>
-
+                        Copy below button for edit 
                         <Button CommandParameter="{Binding .}" Command="{Binding DataContext.RemoveContactFromListCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Grid.Column="1" Content="X" Width="25" Height="25" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>-->
 
-        <ContentControl Content="{Binding CurrentViewModel}">
+        <!--<ContentControl Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
                 <DataTemplate DataType="{x:Type viewmodels:ContactListViewModel}">
                     <views:ContactListView />
@@ -59,7 +70,13 @@
                     <views:ContactAddView />
                 </DataTemplate>
             </ContentControl.Resources>
-        </ContentControl>
+        </ContentControl>-->
+
+        <!--<StackPanel Grid.Row="0">
+            <Label Content="Activity:" Foreground="Gray" />
+            <TextBox Text="{Binding Contact.firstName}" Padding="2, 5" />
+            <Button Content="Save" Command="{Binding NavigateToAddCommand}" Padding="5" Margin="0, 15" />
+        </StackPanel>-->
         
-    </Grid>
+   
 </Window>

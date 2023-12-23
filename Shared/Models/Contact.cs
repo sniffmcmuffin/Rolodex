@@ -4,7 +4,7 @@ namespace Shared.Models;
 
 public class Contact : IContact
 {
-    public Guid Id { get; set; } = Guid.NewGuid(); // Hmm it worked here, but not in console app. 
+    public int Id { get; set; } = 0!; // Hmm it worked here, but not in console app. 
     public string firstName { get; set; } = null!;
     public string lastName { get; set; } = null!;
     public string street { get; set; } = null!;

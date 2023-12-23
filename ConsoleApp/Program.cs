@@ -20,7 +20,7 @@ class Program
             @"../../../../SharedFiles/contacts.json"));
 
        //    services.AddSingleton<IFileService>(provider => new FileService(@"../../../contacts.json"));
-            services.AddSingleton<IFileService>(provider => new FileService(@"../../../../SharedFiles/contacts.json"));
+            services.AddSingleton<IFileService>(provider => new FileService(@"../../../../Shared/contacts.json"));
             services.AddScoped<IMenuService, MenuService>();
             services.AddSingleton<MenuService>();
 
