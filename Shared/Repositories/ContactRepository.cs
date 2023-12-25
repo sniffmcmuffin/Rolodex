@@ -158,4 +158,9 @@ public class ContactRepository : IContactRepository
 
         return response;
     }
+
+    public IServiceResult GetContactById(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

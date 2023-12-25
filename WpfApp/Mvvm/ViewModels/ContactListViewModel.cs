@@ -5,7 +5,7 @@ using Shared.Interfaces;
 using Shared.Models;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics; // Import the Debug class
+using System.Diagnostics; 
 using WpfApp.Services;
 
 namespace WpfApp.Mvvm.ViewModels
@@ -21,11 +21,9 @@ namespace WpfApp.Mvvm.ViewModels
             _contactService = contactService;
 
             var serviceResult = _contactService.GetAllContacts();
-
-            // Print the type of serviceResult.Result
+                      
             Debug.WriteLine("Result Type: " + serviceResult.Result.GetType().FullName);
 
-            // Assuming serviceResult.Result is of type List<IContact>
             if (serviceResult.Result is List<IContact> contacts)
             {
                 // Cast each IContact to Contact
@@ -36,12 +34,9 @@ namespace WpfApp.Mvvm.ViewModels
             }
             else
             {
-                // Handle the case where the result is not of the expected type
-                // You might want to log an error, throw an exception, or handle it in another way
+                // Handle case where result is not of expected type with some logging.               
             }
         }
-
-
 
         [ObservableProperty]
         private ObservableCollection<Shared.Models.Contact> contactList = [];
@@ -57,9 +52,26 @@ namespace WpfApp.Mvvm.ViewModels
         private void NavigateToEdit(Contact contact)
         {
             Debug.WriteLine("Just entered navigatetoedit.");
+          
+            var contactEditViewModel = _serviceProvider.GetRequiredService<ContactEditViewModel>();
+
+            if (contact != null)
+            {
+                Debug.WriteLine($"Setting SelectedPerson to: {contact}");
+                contactEditViewModel.SelectedPerson = contact;
+            }
+            else
+            {
+                Debug.WriteLine("The 'contact' parameter is null.");
+            }
+                     
+            Debug.WriteLine($"SelectedPerson after setting: {contactEditViewModel.SelectedPerson}");
+
+            // Change CurrentViewModel to ContactEditViewModel
             var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-            mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactEditViewModel>();
-            Debug.WriteLine("changed to contacteditviewmodel.");
+            mainViewModel.CurrentViewModel = contactEditViewModel;
+
+            Debug.WriteLine("Changed to ContactEditViewModel.");
         }
 
         [RelayCommand]

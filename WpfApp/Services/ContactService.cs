@@ -6,6 +6,7 @@ using Shared.Models.Responses;
 using Shared.Repositories;
 using Newtonsoft.Json;
 using Shared.Services;
+using Shared.Enums;
 
 namespace WpfApp.Services;
 
@@ -39,6 +40,11 @@ public class ContactService
     public IServiceResult GetAllContacts()
     {        
         return _contactRepository.GetAllContacts();
+    }
+
+    public IServiceResult GetContactFromList(Func<Contact, bool> predicate)
+    {
+        return _contactRepository.GetContactByEmail(predicate);
     }
 
     public Contact GetOne(Func<Contact, bool> predicate)

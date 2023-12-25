@@ -12,6 +12,7 @@
                        
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid Margin="10">
         <Grid.Background>
             
@@ -37,22 +38,22 @@
 
             <StackPanel Grid.Row="0" Margin="0,0,0,10">
                 <Label Content="First Name:" Foreground="Gray" />
-                <TextBox Text="{Binding Contact.firstName}" Padding="2, 5" Width="200" />
+                <TextBox Text="{Binding SelectedPerson.firstName, Mode=TwoWay}" Padding="2, 5" Width="200" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="0,0,0,10">
                 <Label Content="Street:" Foreground="Gray" />
-                <TextBox Text="{Binding Contact.street}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+                <TextBox Text="{Binding SelectedPerson.street, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Margin="0,0,0,10">
                 <Label Content="Zip Code:" Foreground="Gray" />
-                <TextBox Text="{Binding Contact.zipCode}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+                <TextBox Text="{Binding SelectedPerson.zipCode, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Grid.Row="3" Margin="0,0,0,10">
                 <Label Content="Email:"  Foreground="Gray" />
-                <TextBox Text="{Binding Contact.email}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+                <TextBox Text="{Binding SelectedPerson.email, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
             </StackPanel>
         </Grid>
 
@@ -66,17 +67,17 @@
 
             <StackPanel Grid.Row="0" Margin="0,0,170,10">
                 <Label Content="Last Name:" Foreground="Gray" />
-                <TextBox Text="{Binding Contact.lastName}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+                <TextBox Text="{Binding SelectedPerson.lastName, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="0,0,170,10">
                 <Label Content="Phone Number:" Foreground="Gray" />
-                <TextBox Text="{Binding Contact.phoneNumber}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+                <TextBox Text="{Binding SelectedPerson.phoneNumber, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Margin="0,0,170,10">
                 <Label Content="City:" Foreground="Gray" />
-                <TextBox Text="{Binding Contact.city}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+                <TextBox Text="{Binding SelectedPerson.city, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
             </StackPanel>
         </Grid>
 
@@ -85,12 +86,8 @@
             <Button Content="Save" Command="{Binding EditContactCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
             <Button Content="Edit" Command="{Binding EditContactCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
             <Button Content="New" Command="{Binding EditContactCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
-        </DockPanel>
-
-        
+        </DockPanel>       
 
     </Grid>
-
-
 
 </UserControl>

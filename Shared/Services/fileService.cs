@@ -74,8 +74,6 @@ public class FileService : IFileService
         return contactList;
     }
 
-
-
     public string GetContentFromFile()
     {
         throw new NotImplementedException();
