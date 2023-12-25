@@ -56,8 +56,10 @@ namespace WpfApp.Mvvm.ViewModels
         [RelayCommand]
         private void NavigateToEdit(Contact contact)
         {
+            Debug.WriteLine("Just entered navigatetoedit.");
             var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
             mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactEditViewModel>();
+            Debug.WriteLine("changed to contacteditviewmodel.");
         }
 
         [RelayCommand]

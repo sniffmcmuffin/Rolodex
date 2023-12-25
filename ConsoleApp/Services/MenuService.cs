@@ -161,8 +161,9 @@ public class MenuService : IMenuService
 
     private string PadRight(string input, int length)
     {
-        return input.PadRight(length);
+        return (input ?? "").PadRight(length);
     }
+
 
 
     private void AddContactMenu()

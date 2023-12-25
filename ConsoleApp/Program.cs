@@ -17,7 +17,7 @@ class Program
             services.AddSingleton<IContactRepository, ContactRepository>();
             //   services.AddSingleton<IContactService, ContactService>(); // Why did this stopped woring for no apparent reason?
             services.AddSingleton<IContactService>(provider => new ContactService(provider.GetRequiredService<IContactRepository>(),
-            @"../../../../SharedFiles/contacts.json"));
+            @"../../../../Shared/contacts.json"));
 
        //    services.AddSingleton<IFileService>(provider => new FileService(@"../../../contacts.json"));
             services.AddSingleton<IFileService>(provider => new FileService(@"../../../../Shared/contacts.json"));
