@@ -22,11 +22,18 @@ public interface IContact
 
     /// <summary>
     /// Gets or sets the email of a contact.
-    /// </summary>
+    /// </summary
+    string street { get; set; }
+    string zipCode { get; set; } // Cant be int in case someone might have a space between digits.
+    string city { get; set; }
+
     public string email { get; set; }
 
     /// <summary>
     /// Gets or sets the phonenumber of a contact.
     /// </summary>
     public string phoneNumber { get; set; } // String instead of int to allow - in number for easiser viewing.
+    string CompanyName { get; set; }
+    string ContactPerson { get; set; }
+
 }

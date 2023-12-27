@@ -1,4 +1,6 @@
-﻿using ConsoleApp.Enums;
+﻿// using ConsoleApp.Enums;
+using Shared.Enums;
+
 using ConsoleApp.Interfaces;
 
 namespace ConsoleApp.Models.Responses;

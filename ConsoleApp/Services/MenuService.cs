@@ -123,7 +123,7 @@ public class MenuService : IMenuService
             case "2": // List all contacts. Lets move this out of the switch later on.
                 var result = _contactService!.GetAllContacts();
 
-                if (result.Status == Enums.ServiceStatus.SUCCESSED)
+                if (result.Status == Shared.Enums.ServiceStatus.SUCCESSED)
                 {
                     if (result.Result is List<IContact> contactList)
                     {
@@ -231,7 +231,7 @@ public class MenuService : IMenuService
 
         var result = _contactService.GetContactFromList(predicate);
 
-        if (result.Status == Enums.ServiceStatus.SUCCESSED)
+        if (result.Status == Shared.Enums.ServiceStatus.SUCCESSED)
         {
             var contacts = result.Result as List<IContact>;
 
@@ -263,7 +263,7 @@ public class MenuService : IMenuService
 
         var result = _contactService.GetContactFromList(predicate);
 
-        if (result.Status == Enums.ServiceStatus.SUCCESSED)
+        if (result.Status == Shared.Enums.ServiceStatus.SUCCESSED)
         {
             var contacts = result.Result as List<IContact>;
 
@@ -273,7 +273,7 @@ public class MenuService : IMenuService
                 var contactToDelete = contacts.First();
                 var deleteResult = _contactService.DeleteContact(c => c.Id == contactToDelete.Id);
 
-                if (deleteResult.Status == Enums.ServiceStatus.SUCCESSED)
+                if (deleteResult.Status == Shared.Enums.ServiceStatus.SUCCESSED)
                 {
                     Console.WriteLine($"Contact being {UpdateOrDelete} updated..."); // Not perfect.
                 }

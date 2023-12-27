@@ -39,17 +39,17 @@ public class ContactRepository : IContactRepository
                 _contactList.Add(contact);
 
                 _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
-                response.Status = Enums.ServiceStatus.SUCCESSED;
+                response.Status = Shared.Enums.ServiceStatus.SUCCESSED;
             }
             else
             {
-                response.Status = Enums.ServiceStatus.ALREADY_EXISTS;
+                response.Status = Shared.Enums.ServiceStatus.ALREADY_EXISTS;
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-            response.Status = Enums.ServiceStatus.FAILED;
+            response.Status = Shared.Enums.ServiceStatus.FAILED;
             response.Result = ex.Message;
         }
 
@@ -69,13 +69,13 @@ public class ContactRepository : IContactRepository
 
           //   _contactList = _fileService.LoadContactsFromFile();
 
-            response.Status = Enums.ServiceStatus.SUCCESSED;
+            response.Status = Shared.Enums.ServiceStatus.SUCCESSED;
             response.Result = _contactList;
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-            response.Status = Enums.ServiceStatus.FAILED;
+            response.Status = Shared.Enums.ServiceStatus.FAILED;
             response.Result = ex.Message;
         }
 
@@ -100,18 +100,18 @@ public class ContactRepository : IContactRepository
 
             if (contact != null)
             {
-                response.Status = Enums.ServiceStatus.SUCCESSED;
+                response.Status = Shared.Enums.ServiceStatus.SUCCESSED;
                 response.Result = new List<IContact> { contact };
             }
             else
             {
-                response.Status = Enums.ServiceStatus.NOT_FOUND;
+                response.Status = Shared.Enums.ServiceStatus.NOT_FOUND;
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-            response.Status = Enums.ServiceStatus.FAILED;
+            response.Status = Shared.Enums.ServiceStatus.FAILED;
             response.Result = ex.Message;
         }
 
@@ -145,18 +145,18 @@ public class ContactRepository : IContactRepository
                 // Save the updated list to file.
                 _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
 
-                response.Status = Enums.ServiceStatus.SUCCESSED;
+                response.Status = Shared.Enums.ServiceStatus.SUCCESSED;
                 response.Result = contactsToDelete.Cast<IContact>().ToList();
             }
             else
             {
-                response.Status = Enums.ServiceStatus.NOT_FOUND;
+                response.Status = Shared.Enums.ServiceStatus.NOT_FOUND;
             }
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex.Message);
-            response.Status = Enums.ServiceStatus.FAILED;
+            response.Status = Shared.Enums.ServiceStatus.FAILED;
             response.Result = ex.Message;
         }
 

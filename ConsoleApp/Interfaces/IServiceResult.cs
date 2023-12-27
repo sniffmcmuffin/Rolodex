@@ -1,4 +1,5 @@
-﻿using ConsoleApp.Enums;
+﻿// using ConsoleApp.Enums;
+using Shared.Enums;
 
 namespace ConsoleApp.Interfaces;
 

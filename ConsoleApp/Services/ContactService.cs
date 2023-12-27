@@ -28,13 +28,13 @@ public class ContactService : IContactService
 
         switch (result.Status)
         {
-            case Enums.ServiceStatus.SUCCESSED:
+            case Shared.Enums.ServiceStatus.SUCCESSED:
                 Console.WriteLine("Added new contact successfully.");
                 break;
-            case Enums.ServiceStatus.ALREADY_EXISTS:
+            case Shared.Enums.ServiceStatus.ALREADY_EXISTS:
                 Console.WriteLine("Contact already exists.");
                 break;
-            case Enums.ServiceStatus.FAILED:
+            case Shared.Enums.ServiceStatus.FAILED:
                 Console.WriteLine("Failed to add new contact.");
                 Console.WriteLine("Guru Meditation: " + result.Result.ToString());
                 break;
