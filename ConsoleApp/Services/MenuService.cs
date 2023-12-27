@@ -68,6 +68,7 @@ public class MenuService : IMenuService
             case "2":
                 // This is probably lazy, but the idea for now:
                 // Find contact by email and remove it. Then add new contact.
+                // Update: Inser att man borde kunna välja att ha kvar vissa delar, men ändra andra.
                 MenuHeader("Update a contact");
                 Console.WriteLine("Enter email belonging to contact you wish update:");
                 UpdateOrDelete = "updated";
@@ -96,6 +97,12 @@ public class MenuService : IMenuService
         contact.firstName = Console.ReadLine() ?? "";
         Console.Write("Last name: ");
         contact.lastName = Console.ReadLine() ?? "";
+        Console.Write("Street: ");
+        contact.street = Console.ReadLine() ?? "";
+        Console.Write("Zipcode: ");
+        contact.zipCode = Console.ReadLine() ?? "";
+        Console.Write("City: ");
+        contact.city = Console.ReadLine() ?? "";
         Console.Write("Email: ");
         contact.email = Console.ReadLine() ?? "";
         Console.Write("Phone number: ");
