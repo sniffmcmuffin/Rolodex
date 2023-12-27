@@ -12,12 +12,89 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid Margin="20">
+    <Grid Margin="10">
+        <Grid.Background>
+
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color=" #B4FFFFFF" Offset="0" />
+                <GradientStop Color=" Black" Offset="1.2" />
+                <GradientStop Color=" #B4FFFFFF" Offset="0.500" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Column -->
+        <Grid Grid.Column="0" Margin="0,0,170,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,0,10">
+                <Label Content="First Name:" Foreground="Gray" />
+                <TextBox Text="{Binding SelectedPerson.firstName, Mode=TwoWay}" Padding="2, 5" Width="200" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                <Label Content="Street:" Foreground="Gray" />
+                <TextBox Text="{Binding SelectedPerson.street, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Margin="0,0,0,10">
+                <Label Content="Zip Code:" Foreground="Gray" />
+                <TextBox Text="{Binding SelectedPerson.zipCode, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Margin="0,0,0,10">
+                <Label Content="Email:"  Foreground="Gray" />
+                <TextBox Text="{Binding SelectedPerson.email, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Right Column and I hope this looks good on other screens too. -->
+        <Grid Grid.Column="1" Margin="-150,0,150,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Margin="0,0,170,10">
+                <Label Content="Last Name:" Foreground="Gray" />
+                <TextBox Text="{Binding SelectedPerson.lastName, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Margin="0,0,170,10">
+                <Label Content="Phone Number:" Foreground="Gray" />
+                <TextBox Text="{Binding SelectedPerson.phoneNumber, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Margin="0,0,170,10">
+                <Label Content="City:" Foreground="Gray" />
+                <TextBox Text="{Binding SelectedPerson.city, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Buttons -->
+        <DockPanel Grid.Column="1" Margin="0,25,100,0" VerticalAlignment="Top">
+            <Button Content="Save" Command="{Binding AddCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
+            <Button Content="Edit" Command="{Binding EditContactCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
+            <Button Content="New" Command="{Binding EditContactCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
+        </DockPanel>
+
+    </Grid>
+    
+    <!-- <Grid Margin="20">
            <StackPanel>
             <Label Content="Activity:" Foreground="Gray" />
             <TextBox Text="{Binding Contact.firstName}" Padding="2, 5" />
            
             <Button Content="Save" Command="{Binding AddCommand}" Padding="5" Margin="0,15" />
         </StackPanel>
-    </Grid>
+    </Grid> -->
 </UserControl>

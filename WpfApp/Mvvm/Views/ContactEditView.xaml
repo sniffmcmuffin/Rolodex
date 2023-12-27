@@ -63,6 +63,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Margin="0,0,170,10">
@@ -79,11 +80,16 @@
                 <Label Content="City:" Foreground="Gray" />
                 <TextBox Text="{Binding SelectedPerson.city, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
             </StackPanel>
+
+            <StackPanel Grid.Row="3" Margin="0,0,170,10">
+                <Label Content="Contact Id:" Foreground="Gray" />
+                <TextBox Text="{Binding SelectedPerson.Id, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+            </StackPanel>
         </Grid>
 
         <!-- Buttons -->
         <DockPanel Grid.Column="1" Margin="0,25,100,0" VerticalAlignment="Top">
-            <Button Content="Save" Command="{Binding EditContactCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
+            <Button Content="Save" Command="{Binding AddCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
             <Button Content="Edit" Command="{Binding EditContactCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
             <Button Content="New" Command="{Binding EditContactCommand}" Padding="5" Margin="0,0,0,10" DockPanel.Dock="Top" Width="75" />
         </DockPanel>       

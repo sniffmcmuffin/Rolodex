@@ -2,6 +2,9 @@
 using Shared.Interfaces;
 using Shared.Models;
 using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Shared.Services;
 
@@ -35,11 +38,14 @@ public class FileService : IFileService
 
     public bool SaveContentToFile(string content)
     {
+        Debug.Write("Fileservice " + content);
+
         try
         {
             using (var sw = new StreamWriter(_filePath))
             {
                 sw.WriteLine(content);
+                Debug.Write("Fileservice " + content);
             }
 
             return true;

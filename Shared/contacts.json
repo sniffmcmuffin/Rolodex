@@ -1,1 +1,38 @@
-[{"Id":1,"firstName":"Jimmy","lastName":"Sjöström","street":null,"zipCode":0,"city":null,"email":"sjostom.jimmy@domain.se","phoneNumber":"074-3445533","CompanyName":null,"ContactPerson":null},{"Id":2,"firstName":"gfhfgfghjghfj","lastName":null,"street":null,"zipCode":0,"city":null,"email":null,"phoneNumber":null,"CompanyName":null,"ContactPerson":null}]
+[
+  {
+    "Id": 1,
+    "firstName": "Jimmy",
+    "lastName": "Sjöström",
+    "street": null,
+    "zipCode": null,
+    "city": null,
+    "email": "jimmy.sjostrom@domain.nu",
+    "phoneNumber": "074-3434324",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 2,
+    "firstName": "Anders",
+    "lastName": "Larsson",
+    "street": null,
+    "zipCode": null,
+    "city": null,
+    "email": "anders.larsson@domain.se",
+    "phoneNumber": "073-435345",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 3,
+    "firstName": "Sven",
+    "lastName": "Kula",
+    "street": "Snorgatan 7",
+    "zipCode": "454 56",
+    "city": "Örebor",
+    "email": "kulan.boll@domain.ru",
+    "phoneNumber": "073-343343",
+    "CompanyName": null,
+    "ContactPerson": null
+  }
+]

@@ -178,7 +178,7 @@ public class MenuService : IMenuService
 
     private void SettingsMenu()
     {
-        throw new NotImplementedException();
+       
     }
 
     private void UpdateContactMenu()

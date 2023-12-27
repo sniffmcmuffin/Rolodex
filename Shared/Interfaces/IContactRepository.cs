@@ -21,7 +21,8 @@ public interface IContactRepository
     /// <returns>An IServiceResult with the list of contacts, else error message if failed.</returns>
     IServiceResult GetAllContacts();
 
-    IServiceResult GetContactById(int id);
+    IServiceResult GetContactById(Func<Contact, bool> predicate);
+   //  IServiceResult GetContactById(int id);
 
     /// <summary>
     /// Gets a contact from repository based on provided predicate.

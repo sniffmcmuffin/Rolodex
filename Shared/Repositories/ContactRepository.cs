@@ -28,10 +28,11 @@ public class ContactRepository : IContactRepository
             {
                 throw new InvalidOperationException("_fileService is null.");
             }
-
+            Debug.WriteLine("now in contactrepository " +  contact.Id);
             // Lambda. X short/instead of contact
             if (!_contactList.Any(x => x.email == contact.email))
             {
+                Debug.WriteLine("now in contactrepository lambda" + contact.Id);
                 contact.Id = _contactList.Count + 1; // This dont like guid, only int.
                 _contactList.Add(contact);
 
@@ -159,8 +160,39 @@ public class ContactRepository : IContactRepository
         return response;
     }
 
-    public IServiceResult GetContactById(int id)
+    public IServiceResult GetContactById(Func<Contact, bool> predicate)
     {
-        throw new NotImplementedException();
+        IServiceResult response = new ServiceResult();
+
+        try
+        {
+            if (_fileService == null)
+            {
+                throw new InvalidOperationException("_fileService is null.");
+            }
+
+            _contactList = _fileService.LoadContactsFromFile();
+
+            // Find the contact with the specified predicate.
+            var contact = _contactList.OfType<Contact>().FirstOrDefault(predicate);
+
+            if (contact != null)
+            {
+                response.Status = Enums.ServiceStatus.SUCCESSED;
+                response.Result = new List<IContact> { contact };
+            }
+            else
+            {
+                response.Status = Enums.ServiceStatus.NOT_FOUND;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine(ex.Message);
+            response.Status = Enums.ServiceStatus.FAILED;
+            response.Result = ex.Message;
+        }
+
+        return response;
     }
 }

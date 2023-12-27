@@ -9,7 +9,7 @@
         string lastName { get; set; }
         string phoneNumber { get; set; }
         string street { get; set; }
-        int zipCode { get; set; }
+        string zipCode { get; set; } // Cant be int in case someone might have a space between digits.
         string CompanyName { get; set; }
         string ContactPerson { get; set; }
     }
