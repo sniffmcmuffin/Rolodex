@@ -37,12 +37,12 @@
 
             <StackPanel Grid.Row="0" Margin="0,0,0,10">
                 <Label Content="First Name:" Foreground="Gray" />
-                <TextBox Text="{Binding SelectedPerson.firstName, Mode=TwoWay}" Padding="2, 5" Width="200" />
+                <TextBox Text="{Binding SelectedPerson.firstName, Mode=TwoWay, TargetNullValue='New'}" Padding="2, 5" Width="200" />
             </StackPanel>
 
             <StackPanel Grid.Row="1" Margin="0,0,0,10">
                 <Label Content="Street:" Foreground="Gray" />
-                <TextBox Text="{Binding SelectedPerson.street, Mode=TwoWay}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
+                <TextBox Text="{Binding SelectedPerson.street, Mode=TwoWay, TargetNullValue='New'}" Padding="2, 5" Width="200" VerticalAlignment="Center" />
             </StackPanel>
 
             <StackPanel Grid.Row="2" Margin="0,0,0,10">

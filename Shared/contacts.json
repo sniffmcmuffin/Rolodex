@@ -34,5 +34,65 @@
     "phoneNumber": "073-343343",
     "CompanyName": null,
     "ContactPerson": null
+  },
+  {
+    "Id": 4,
+    "firstName": "karl",
+    "lastName": "kula",
+    "street": "bönskogen 7",
+    "zipCode": "545 66",
+    "city": "Möråkern",
+    "email": "karl@domain.es",
+    "phoneNumber": "073-3546546",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 5,
+    "firstName": "Sven",
+    "lastName": "Börjesson",
+    "street": "Åkergatan 7",
+    "zipCode": "343 34",
+    "city": "Örebro",
+    "email": "sven@kingen.se",
+    "phoneNumber": "043-4545454",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 6,
+    "firstName": "New",
+    "lastName": "Contact",
+    "street": "Default Street",
+    "zipCode": "Default Zip",
+    "city": "Default City",
+    "email": "Default Email",
+    "phoneNumber": "Default Phone",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 7,
+    "firstName": "hoopp",
+    "lastName": "dgdg",
+    "street": "dgdg",
+    "zipCode": "gdg",
+    "city": "dg",
+    "email": "dgfdgf",
+    "phoneNumber": "dgfdgfdgDefault Phone",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 8,
+    "firstName": "karin",
+    "lastName": "Mungåker",
+    "street": "Rallarsvängen 34",
+    "zipCode": "454 56",
+    "city": "Möråkra",
+    "email": "hoppan@gmail.es",
+    "phoneNumber": "034-435454",
+    "CompanyName": null,
+    "ContactPerson": null
   }
 ]
