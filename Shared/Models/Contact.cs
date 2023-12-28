@@ -15,4 +15,8 @@ public class Contact : IContact
     public string CompanyName { get; set; } = null!;
     public string ContactPerson { get; set; } = null!;
 
+    public override string ToString()
+    {
+        return $"First Name: {firstName}, Last Name: {lastName}, Email: {email}, Phone Number: {phoneNumber}";
+    }
 }
