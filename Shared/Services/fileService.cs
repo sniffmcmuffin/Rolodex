@@ -2,9 +2,6 @@
 using Shared.Interfaces;
 using Shared.Models;
 using System.Diagnostics;
-using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Shared.Services;
 
