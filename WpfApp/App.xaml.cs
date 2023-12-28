@@ -24,7 +24,6 @@ public partial class App : Application
 
         builder = Host.CreateDefaultBuilder().ConfigureServices(services =>
         {
-          //  services.AddSingleton<ContactService>();
             services.AddSingleton<IContactRepository, ContactRepository>();
             
             services.AddSingleton<IFileService>(provider => new FileService(@"../../../../Shared/contacts.json"));
@@ -51,7 +50,6 @@ public partial class App : Application
 
         var mainWindow = builder!.Services.GetRequiredService<MainWindow>();
         mainWindow.Show();
-
        
        // base.OnStartup(e); Standardfunktioner om man behöver dom.
     }

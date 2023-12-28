@@ -60,8 +60,7 @@ namespace WpfApp.Mvvm.ViewModels
             _contactService = contactService;
             _contactRepository = _serviceProvider.GetRequiredService<IContactRepository>();
             _fileService = new FileService("../../../../Shared/contacts.json");
-
-            // Load ContactList from file.
+         
             LoadContactList();
         }
 
@@ -132,7 +131,6 @@ namespace WpfApp.Mvvm.ViewModels
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }
-
 
         [RelayCommand]
         public void EditContact()

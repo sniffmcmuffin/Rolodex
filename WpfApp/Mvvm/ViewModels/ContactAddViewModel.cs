@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using WpfApp.Mvvm.Views;
 using WpfApp.Services;
 
 namespace WpfApp.Mvvm.ViewModels;
@@ -22,12 +23,6 @@ public partial class ContactAddViewModel : ObservableObject
     private readonly ContactService _contactService;
     private readonly IContactRepository _contactRepository;
     private readonly IFileService _fileService;
-
- //   [ObservableProperty]
-  //  internal ObservableCollection<Shared.Models.Contact> _contactList = [];
-
- //   [ObservableProperty]
-  //  private Shared.Models.Contact contact = new();
 
     private ObservableCollection<Shared.Models.Contact> _contactList = new ObservableCollection<Shared.Models.Contact>();
 
@@ -223,11 +218,10 @@ public partial class ContactAddViewModel : ObservableObject
         return result;
     }
 
-    [RelayCommand] // Does not update the list wit new contact at the moment.
+    [RelayCommand] // Does not update the list with new contact at the moment.
     private void NavigateToList()
     {
-        LoadContactList();
-        var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-        mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactListViewModel>();
+      var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
+      mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactListViewModel>();
     }
 }
