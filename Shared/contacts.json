@@ -1,1 +1,110 @@
-[{"Id":1,"firstName":"Jimmy","lastName":"Sjöström","email":"jimmy.sjostrom@domain.nu","phoneNumber":"074-3434324","street":null,"zipCode":null,"city":null,"CompanyName":null,"ContactPerson":null},{"Id":2,"firstName":"Anders","lastName":"Larsson","email":"anders.larsson@domain.se","phoneNumber":"073-435345","street":null,"zipCode":null,"city":null,"CompanyName":null,"ContactPerson":null},{"Id":3,"firstName":"Sven","lastName":"Kula","email":"kulan.boll@domain.ru","phoneNumber":"073-343343","street":"Snorgatan 7","zipCode":"454 56","city":"Örebor","CompanyName":null,"ContactPerson":null},{"Id":4,"firstName":"karl","lastName":"kula","email":"karl@domain.es","phoneNumber":"073-3546546","street":"bönskogen 7","zipCode":"545 66","city":"Möråkern","CompanyName":null,"ContactPerson":null},{"Id":5,"firstName":"Sven","lastName":"Börjesson","email":"sven@kingen.se","phoneNumber":"043-4545454","street":"Åkergatan 7","zipCode":"343 34","city":"Örebro","CompanyName":null,"ContactPerson":null},{"Id":6,"firstName":"New","lastName":"Contact","email":"Default Email","phoneNumber":"Default Phone","street":"Default Street","zipCode":"Default Zip","city":"Default City","CompanyName":null,"ContactPerson":null},{"Id":7,"firstName":"hoopp","lastName":"dgdg","email":"dgfdgf","phoneNumber":"dgfdgfdgDefault Phone","street":"dgdg","zipCode":"gdg","city":"dg","CompanyName":null,"ContactPerson":null},{"Id":8,"firstName":"karin","lastName":"Mungåker","email":"hoppan@gmail.es","phoneNumber":"034-435454","street":"Rallarsvängen 34","zipCode":"454 56","city":"Möråkra","CompanyName":null,"ContactPerson":null},{"Id":9,"firstName":"Konsol","lastName":"Appen","email":"konsol.app@domain.nu","phoneNumber":"045-343433","street":"ConsoleLane 34","zipCode":"434 34","city":"AppTown","CompanyName":null,"ContactPerson":null}]
+[
+  {
+    "Id": 1,
+    "firstName": "Jimmy",
+    "lastName": "Sjöström",
+    "street": null,
+    "zipCode": null,
+    "city": null,
+    "email": "jimmy.sjostrom@domain.nu",
+    "phoneNumber": "074-3434324",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 2,
+    "firstName": "Anders",
+    "lastName": "Larsson",
+    "street": null,
+    "zipCode": null,
+    "city": null,
+    "email": "anders.larsson@domain.se",
+    "phoneNumber": "073-435345",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 3,
+    "firstName": "Sven",
+    "lastName": "Kula",
+    "street": "Snorgatan 7",
+    "zipCode": "454 56",
+    "city": "Örebor",
+    "email": "kulan.boll@domain.ru",
+    "phoneNumber": "073-343343",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 4,
+    "firstName": "Karl",
+    "lastName": "Kula",
+    "street": "bönskogen 7",
+    "zipCode": "545 66",
+    "city": "Möråkern",
+    "email": "karl@domain.es",
+    "phoneNumber": "073-3546546",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 5,
+    "firstName": "Sven",
+    "lastName": "Börjesson",
+    "street": "Åkergatan 7",
+    "zipCode": "343 34",
+    "city": "Örebro",
+    "email": "sven@kingen.se",
+    "phoneNumber": "043-4545454",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 6,
+    "firstName": "New",
+    "lastName": "Contact",
+    "street": "Default Street",
+    "zipCode": "Default Zip",
+    "city": "Default City",
+    "email": "Default Email",
+    "phoneNumber": "Default Phone",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 7,
+    "firstName": "hoopp",
+    "lastName": "dgdg",
+    "street": "dgdg",
+    "zipCode": "gdg",
+    "city": "dg",
+    "email": "dgfdgf",
+    "phoneNumber": "dgfdgfdgDefault Phone",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 8,
+    "firstName": "karin",
+    "lastName": "Mungåker",
+    "street": "Rallarsvängen 34",
+    "zipCode": "454 56",
+    "city": "Möråkra",
+    "email": "hoppan@gmail.es",
+    "phoneNumber": "034-435454",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 9,
+    "firstName": "Konsol",
+    "lastName": "Appen",
+    "street": "ConsoleLane 34",
+    "zipCode": "434 34",
+    "city": "AppTown",
+    "email": "konsol.app@domain.nu",
+    "phoneNumber": "045-343433",
+    "CompanyName": null,
+    "ContactPerson": null
+  }
+]
