@@ -1,11 +1,12 @@
 # Rolodex
 #
-# I had to create a whole new project 'KonsolApp' to be able to  use 
-# /Shared project. 
+# I had to create a whole new project 'KonsolApp' 
+# to be able to  use /Shared project. 
 #
 # Known bugs:
 # ContactAddviewModel.cs
-# - NavigateToList() - Does not update the list with the new contact. Requires restarting the app. Why?
+# - NavigateToList() - Does not update the list with the new contact. 
+#                      Requires restarting the app. Why?
 #
 # TODO:
 # - Add() in ContactEdit/AddViewModel.cs need to be cleaned up and seperate concerns.

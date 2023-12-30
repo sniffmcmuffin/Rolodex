@@ -50,26 +50,18 @@ public class SharedContactService : ISharedContactService
 
     public IServiceResult GetContactFromList(Func<Contact, bool> predicate)
     {
-        return _contactRepository.GetContactByEmail(predicate);
-    }
+        var response = _contactRepository.GetContactByEmail(predicate);
 
-    public IServiceResult GetContactByEmail(string email)
-    {
-        throw new NotImplementedException();
-    }
+        if (response.Status == Enums.ServiceStatus.NOT_FOUND)
+        {
+            response.Result = new List<IContact>(); // Set an empty list for NOT_FOUND
+        }
 
-    public IServiceResult UpdateContact(IContact contact)
-    {
-        throw new NotImplementedException();
+        return response;
     }
 
     public IServiceResult DeleteContact(Func<IContact, bool> predicate)
     {
         return _contactRepository.DeleteContact(predicate);
-    }
-
-    public IServiceResult DeleteContactByEmail(string email)
-    {
-        throw new NotImplementedException();
     }
 }
