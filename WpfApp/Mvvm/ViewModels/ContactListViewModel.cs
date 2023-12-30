@@ -5,7 +5,9 @@ using Shared.Interfaces;
 using Shared.Models;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics; 
+using System.Diagnostics;
+using System.Windows;
+using System.Windows.Input;
 using WpfApp.Services;
 
 namespace WpfApp.Mvvm.ViewModels
@@ -14,6 +16,9 @@ namespace WpfApp.Mvvm.ViewModels
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ContactService _contactService;
+        private readonly IFileService _fileService;
+
+        public ICommand DeleteCommand => new RelayCommand<Contact>(DeleteContactCommand);
 
         public ContactListViewModel(IServiceProvider serviceProvider, ContactService contactService)
         {
@@ -77,8 +82,30 @@ namespace WpfApp.Mvvm.ViewModels
         [RelayCommand]
         private void Remove(Contact contact)
         {
-            _contactService.Remove(contact);
+            _contactService.Remove(c => c.Id == contact.Id);
             ContactList = new ObservableCollection<Contact>(_contactService.GetAll());
+        }
+
+        [RelayCommand]
+        private void DeleteContactCommand(Contact contact)
+        {
+          
+
+            if (contact == null)
+            {
+                return;
+            }
+                       
+            var result = MessageBox.Show("Are you sure you want to delete " + contact +"?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+             
+                _contactService.Remove(c => c.Id == contact.Id);
+                Debug.WriteLine(contact.Id);
+            }
+
+            ContactList.Remove(contact);
         }
     }
 }

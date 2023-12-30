@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Windows;
 using System;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace WpfApp.Services;
 
@@ -29,20 +30,6 @@ public class ContactService
         _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
         _fileService = new FileService(filePath);  
     }
-
-    //public void Add(Contact contact)
-    //{
-    //    Debug.WriteLine("Now in Add function in ContactService. Contact: " + JsonConvert.SerializeObject(contact));
-
-    //    Application.Current.Dispatcher.Invoke(() =>
-    //    {
-    //        var result = _contactRepository.AddContact(contact);
-
-    //        //  _contactService!.AddContact(contact);
-    //        //  _contacts.Add(contact);
-
-    //    });
-
 
         public IServiceResult Add(IContact contact)
         {
@@ -139,57 +126,9 @@ public class ContactService
         return contact;
     }
 
-    //public IServiceResult UpdateContact(IContact updatedContact)
-    //{
-    //    IServiceResult response = new ServiceResult();
-
-
-    //    try
-    //    {
-    //        if (_fileService == null)
-    //        {
-    //            throw new InvalidOperationException("_fileService is null.");
-    //        }
-
-    //        _contactList = _fileService.LoadContactsFromFile();
-
-    //        var existingContact = _contactList.OfType<Contact>().FirstOrDefault(x => x.email == updatedContact.email);
-
-    //        if (existingContact != null)
-    //        {
-    //            // Update the existing contact
-    //            existingContact.firstName = updatedContact.firstName;
-    //            existingContact.lastName = updatedContact.lastName;
-    //            existingContact.street = updatedContact.street;
-    //            // ... update other properties
-
-    //            // Save the updated list to file
-    //            _fileService.SaveContentToFile(JsonConvert.SerializeObject(_contactList));
-
-    //            response.Status = Shared.Enums.ServiceStatus.SUCCESSED;
-    //        }
-    //        else
-    //        {
-    //            response.Status = Shared.Enums.ServiceStatus.NOT_FOUND;
-    //        }
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Debug.WriteLine(ex.Message);
-    //        response.Status = Shared.Enums.ServiceStatus.FAILED;
-    //        response.Result = ex.Message;
-    //    }
-
-    //    return response;
-    //}
-
-    public void Remove(Contact contact)
+    public IServiceResult Remove(Func<IContact, bool> predicate)
     {
-      var con = _contacts.FirstOrDefault(x => x.Id == contact.Id);
-      if (con != null)
-        {
-            _contacts.Remove(con);
-        }
+        return _contactRepository.DeleteContact(predicate);
     }
 
     public bool Exists(Func<Contact, bool> predicate)

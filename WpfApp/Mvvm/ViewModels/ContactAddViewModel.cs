@@ -139,6 +139,7 @@ public partial class ContactAddViewModel : ObservableObject
             var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
             Debug.WriteLine("Before moving to list view.");
             mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactListViewModel>();
+            
             Debug.WriteLine("After moving to list view.");
         }
         catch (Exception ex)
