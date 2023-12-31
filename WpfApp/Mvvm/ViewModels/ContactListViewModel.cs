@@ -16,7 +16,7 @@ namespace WpfApp.Mvvm.ViewModels
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ContactService _contactService;
-        private readonly IFileService _fileService;
+        private readonly IFileService? _fileService;
 
         public ICommand DeleteCommand => new RelayCommand<Contact>(DeleteContactCommand);
 
@@ -30,8 +30,7 @@ namespace WpfApp.Mvvm.ViewModels
             Debug.WriteLine("Result Type: " + serviceResult.Result.GetType().FullName);
 
             if (serviceResult.Result is List<IContact> contacts)
-            {
-                // Cast each IContact to Contact
+            {             
                 var concreteContacts = contacts.Cast<Shared.Models.Contact>();
 
                 Debug.WriteLine("test");
@@ -87,10 +86,8 @@ namespace WpfApp.Mvvm.ViewModels
         }
 
         [RelayCommand]
-        private void DeleteContactCommand(Contact contact)
+        private void DeleteContactCommand(Contact? contact)
         {
-          
-
             if (contact == null)
             {
                 return;

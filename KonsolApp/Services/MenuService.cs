@@ -23,8 +23,8 @@ public class MenuService : IMenuService
             MenuHeader("MAIN");
             Console.WriteLine($"| {"1.",-3} Contacts");
             Console.WriteLine($"| {"2.",-3} Lists");
-            Console.WriteLine($"| {"3.",-3} Settings");
-            Console.WriteLine($"| {"4.",-3} Quit");
+        //    Console.WriteLine($"| {"3.",-3} Settings"); For the future.
+            Console.WriteLine($"| {"3.",-3} Quit");
             Console.WriteLine("| Enter menu option: ");
             var option = Console.ReadLine();
 
@@ -36,10 +36,10 @@ public class MenuService : IMenuService
                 case "2":
                     ListMenu();
                     break;
+                //case "3":
+                //    SettingsMenu();
+                //    break;
                 case "3":
-                    SettingsMenu();
-                    break;
-                case "4":
                     QuitApp();
                     break;
                 default:
@@ -230,7 +230,6 @@ public class MenuService : IMenuService
 
     public void ShowContactByEmail()
     {
-
         string email = Console.ReadLine() ?? "default@email.com";
 
         Func<Contact, bool> predicate = contact => contact.email.Equals(email, StringComparison.OrdinalIgnoreCase);
@@ -243,10 +242,17 @@ public class MenuService : IMenuService
 
             if (contacts != null)
             {
+                  Console.WriteLine("+------------------------------------------------------------------------");
+                  MenuHeader("Kontakt");
+                //Console.WriteLine($" | {PadRight("Name", 30)} {PadRight("Email", 30)}");
+                //Console.WriteLine($" | {PadRight("Street", 30)} {PadRight("Phonenumber", 30)} ");
+                //Console.WriteLine($" | {PadRight("Adress", 30)} ");
+
                 foreach (var contact in contacts)
                 {
-                    Console.WriteLine(contact);
-                    Debug.WriteLine(contact);
+                    Console.WriteLine($"| {PadRight($"{contact.firstName} {contact.lastName}", 30)} {PadRight(contact.email, 30)}");
+                    Console.WriteLine($"| {PadRight(contact.street, 30)} {PadRight(contact.phoneNumber, 30)} ");
+                    Console.WriteLine($"| {PadRight($"{contact.zipCode}, {contact.city}", 30)} ");
                 }
             }
             else
@@ -298,6 +304,5 @@ public class MenuService : IMenuService
         {
             Console.WriteLine($"Failed to retrieve contact: {result.Result}");
         }
-
     }
 }     

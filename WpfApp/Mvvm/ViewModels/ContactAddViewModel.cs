@@ -139,7 +139,6 @@ public partial class ContactAddViewModel : ObservableObject
             var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
             Debug.WriteLine("Before moving to list view.");
             mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactListViewModel>();
-            
             Debug.WriteLine("After moving to list view.");
         }
         catch (Exception ex)
@@ -222,7 +221,7 @@ public partial class ContactAddViewModel : ObservableObject
     [RelayCommand] // Does not update the list with new contact at the moment.
     private void NavigateToList()
     {
-      var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-      mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactListViewModel>();
+        var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
+        mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ContactListViewModel>();     
     }
 }

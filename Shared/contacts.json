@@ -94,5 +94,29 @@
     "phoneNumber": "072-343543",
     "CompanyName": null,
     "ContactPerson": null
+  },
+  {
+    "Id": 14,
+    "firstName": "New",
+    "lastName": "Contact",
+    "street": "Default Street",
+    "zipCode": "Default Zip",
+    "city": "Default City",
+    "email": "Default Email",
+    "phoneNumber": "Default Phone",
+    "CompanyName": null,
+    "ContactPerson": null
+  },
+  {
+    "Id": 15,
+    "firstName": "New",
+    "lastName": "Contact",
+    "street": "Default Street",
+    "zipCode": "Default Zip",
+    "city": "Default City",
+    "email": "Default Email",
+    "phoneNumber": "Default Phone",
+    "CompanyName": null,
+    "ContactPerson": null
   }
 ]
