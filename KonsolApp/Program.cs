@@ -21,7 +21,7 @@ class Program
 {
     static void Main()
     {
-        Console.WindowWidth = 200; // For the logo
+       // Console.WindowWidth = 200; // For the logo
 
         var builder = Host.CreateDefaultBuilder().ConfigureServices(services =>
         {

@@ -43,6 +43,7 @@ public class MenuService : IMenuService
                     QuitApp();
                     break;
                 default:
+                    Console.WriteLine("No such option.");
                     DisplayPressAnyKey();
                     break;
             }
@@ -170,31 +171,6 @@ public class MenuService : IMenuService
     private string PadRight(string input, int length)
     {
         return (input ?? "").PadRight(length);
-    }
-
-    private void AddContactMenu()
-    {
-
-    }
-
-    private void DeleteContactMenu()
-    {
-
-    }
-
-    private void SettingsMenu()
-    {
-
-    }
-
-    private void UpdateContactMenu()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void ViewContactMenu()
-    {
-        throw new NotImplementedException();
     }
 
     private void MenuHeader(string header) // Base menu.
