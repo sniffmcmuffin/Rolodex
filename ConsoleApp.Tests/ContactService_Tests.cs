@@ -103,6 +103,53 @@ namespace ConsoleApp.Tests
             // Assert
             Assert.Equal(ServiceStatus.SUCCESSED, deleteResult.Status);
         }
+    }
 
+    public class FileServiceTests
+    {
+        [Fact]
+        public void GetContentFromFile_ShouldReturnContent()
+        {
+            // Arrange
+            var mockFileService = new Mock<IFileService>();
+            mockFileService.Setup(fs => fs.GetContentFromFile()).Returns("Test content");
+
+            // Act
+            var result = mockFileService.Object.GetContentFromFile();
+
+            // Assert
+            Assert.Equal("Test content", result);
+        }
+
+        [Fact]
+        public void LoadContactsFromFile_ShouldReturnListOfContacts()
+        {
+            // Arrange
+            var mockFileService = new Mock<IFileService>();
+            var mockContact = new Mock<IContact>();
+            var expectedContacts = new List<IContact> { mockContact.Object };
+
+            mockFileService.Setup(fs => fs.LoadContactsFromFile()).Returns(expectedContacts);
+
+            // Act
+            var result = mockFileService.Object.LoadContactsFromFile();
+
+            // Assert
+            Assert.Equal(expectedContacts, result);
+        }
+
+        [Fact]
+        public void SaveContentToFile_ShouldReturnTrue()
+        {
+            // Arrange
+            var mockFileService = new Mock<IFileService>();
+            mockFileService.Setup(fs => fs.SaveContentToFile(It.IsAny<string>())).Returns(true);
+
+            // Act
+            var result = mockFileService.Object.SaveContentToFile("Test content");
+
+            // Assert
+            Assert.True(result);
+        }
     }
 }

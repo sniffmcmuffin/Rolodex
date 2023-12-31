@@ -12,10 +12,11 @@ using System.Windows;
 using System;
 using System.Linq;
 using System.Collections.ObjectModel;
+using WpfApp.Interfaces;
 
 namespace WpfApp.Services;
 
-public class ContactService
+public class ContactService : IContactService
 {
     private List<Contact> _contacts = [];
     //  private List<Contact> _contacts = new List<Contact>();
@@ -28,11 +29,11 @@ public class ContactService
         // _fileService = new FileService(filePath);
 
         _contactRepository = contactRepository ?? throw new ArgumentNullException(nameof(contactRepository));
-        _fileService = new FileService(filePath);  
+        _fileService = new FileService(filePath);
     }
 
-        public IServiceResult Add(IContact contact)
-        {
+    public IServiceResult Add(IContact contact)
+    {
 
         Debug.WriteLine("Contacts in List: " + string.Join(", ", _contacts.Select(c => c.Id)));
 
@@ -54,15 +55,15 @@ public class ContactService
         }
 
         return result;
-        }
-
-        public IEnumerable<Contact> GetAll()
-    {
-       return _contacts;     
     }
-    
+
+    public IEnumerable<Contact> GetAll()
+    {
+        return _contacts;
+    }
+
     public IServiceResult GetAllContacts()
-    {        
+    {
         return _contactRepository.GetAllContacts();
     }
 
@@ -106,7 +107,7 @@ public class ContactService
             Debug.WriteLine("EXISTING CONTACT ID " + existingContact.Id);
 
             Debug.WriteLine("UPDATE 1 " + contact.firstName);
-           
+
             existingContact.firstName = contact.firstName;
             existingContact.lastName = contact.lastName;
             existingContact.email = contact.email;

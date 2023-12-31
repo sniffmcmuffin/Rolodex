@@ -1,5 +1,8 @@
 ﻿namespace Shared.Enums;
 
+/// <summary>
+/// Returns a status based on given result.
+/// </summary>
 public enum ServiceStatus
 {
     FAILED = 0,
